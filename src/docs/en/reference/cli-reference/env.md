@@ -39,10 +39,9 @@ FOO 3
 
 - `arc env` displays environment variables for the current `.arc`
 - `arc env staging FOOBAZ somevalue` writes env variable `FOOBAZ=somevalue` to staging Lambdas
-- `arc env remove testing FOOBAZ` removes a `testing` env var
-- `arc env verify` display a report of Lambdas and their env variables
 
 > Things to note: `NODE_ENV`, `ARC_APP_NAME` and `SESSION_TABLE_NAME` are reserved names.
+> Values that contain special characters, like e-mail addresses should be wrapped in double quotes. 
 
 ## Flags
 

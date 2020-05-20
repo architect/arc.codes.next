@@ -9,7 +9,7 @@ sections:
 
 ## Overview
 
-The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to build serverless applications on AWS. The `sam.json` specification is used to define your serverless application. `arc package` generates a Cloudformation template from the current `.arc` file. This method will write a sam.json file to the current working directory in your project.
+The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to build serverless applications on AWS. The `sam.json` specification is used to define your serverless application. `arc package` generates a CloudFormation template from the current `.arc` file. This method will write a sam.json file to the current working directory in your project.
 
 > [Go here to learn more about AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) from the AWS docs.
 

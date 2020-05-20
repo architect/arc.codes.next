@@ -1,6 +1,7 @@
 3W
 .arc-config
 .arc-env
+.aws
 .env
 .html
 .vimrc
@@ -241,6 +242,7 @@ TOML
 transpile
 transpilers
 transpiling
+truthy
 tsx
 TSX
 TTL

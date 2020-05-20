@@ -42,7 +42,7 @@ To ensure local development behavior is as close to `staging` and `production` a
 
 ### `hydrate.update(options, callback)`
 
-Updates dependencies in all Functions found in the specified `basepath`. Invokes [`hydrate.shared()`][shared]. Note that this will only functionally differ from [`hydrate.install()`][install] if you use a lockfile like `package-lock.json` or `Gemfile.lock`.
+Updates dependencies in all Functions found in the specified `basepath`. Invokes [`hydrate.shared()`][shared]. Note that this will only functionally differ from [`hydrate.install()`][install] if you use a lock-file like `package-lock.json` or `Gemfile.lock`.
 
 Note that for the default value of `basepath='src'`, this means `update` will also update dependencies in shared folders like `src/shared` and `src/views`.
 

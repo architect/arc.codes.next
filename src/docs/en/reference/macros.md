@@ -27,7 +27,19 @@ For this example the `.arc` manifest file above, the macro is in `src/macros/my-
 
 > Note: Macros are a new feature, and only JavaScript macros are supported at this time; however, Python and Ruby are on the roadmap.
 
-### Define
+### Deploy
+
+When running `arc deploy` Architect looks for macros to run in: 
+
+- `src/macros/filename`
+- `node_modules/macro-module-name`
+
+You deploy a macro by using this syntax:
+
+- `arc deploy` to deploy with CloudFormation to staging
+- `arc deploy production` to run a full CloudFormation production deployment
+
+## Examples
 
 Macros receive the parsed `.arc` file so custom pragmas and config can be defined. The second argument is the current CloudFormation template. 
 
@@ -36,24 +48,10 @@ Macros receive the parsed `.arc` file so custom pragmas and config can be define
  * @param {object} arc - the parsed .arc file currently executing
  * @param {object} cloudformation - the current AWS::Serverless CloudFormation template
  * @param {object} stage - the application stage (one of `staging` or `production`)
- */
+ **/
 module.exports = function myCustomMacro(arc, cloudformation, stage) {
   // modify cloudformation.Resources here
   return cloudformation
 }
 ```
-
-### Deploy
-
-When running `arc deploy` Architect looks for macros to run in: 
-
-- `src/macros/filename`
-- `node_modules/macro-module-name`
-
-- `arc deploy` to deploy with CloudFormation to staging
-- `arc deploy production` to run a full CloudFormation production deployment
-
-## Examples
-
-ADD ME!
-
+> Note: macros are a new feature and only JavaScript macros are supported at this time; however Python and Ruby are planned

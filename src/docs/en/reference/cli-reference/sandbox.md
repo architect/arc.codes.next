@@ -7,10 +7,17 @@ sections:
   - Init scripts
 ---
 
+## Overview
+
+Architect dev server: run full Architect projects locally & offline in a sandbox
+
+Starts a local web server and in-memory database for previewing code defined by `.arc`.
+
 ## Usage
 
-ADD ME!
-
+```js
+let sandbox = require('@architect/sandbox')
+```
 
 ## Flags
 

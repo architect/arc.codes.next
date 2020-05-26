@@ -41,6 +41,7 @@ CA
 cd
 CDN
 CDNs
+CFAs
 cheatsheet
 CLA
 CLI
@@ -106,6 +107,7 @@ eslint
 esmodules
 eval
 EventBridge
+filesystem
 filetype
 FQDN
 frontend
@@ -126,7 +128,9 @@ ing
 init
 Init
 installable
+instantiations
 internets
+intra-project
 js
 JS
 JSF
@@ -230,6 +234,7 @@ src
 SSL
 SSM
 stateful
+statefulness
 subdirectories
 subdomain
 subdomains

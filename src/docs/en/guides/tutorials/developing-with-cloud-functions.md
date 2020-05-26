@@ -59,8 +59,8 @@ Because cloud functions are effectively stateless, older socket-based data persi
 ### Smaller cloud functions run faster
 Cloud functions start and run fastest when they're small and discrete.
 - For this reason Architect applications split your application up into individual, stateless functions, each its own directory in your repo
-- Of course, intra-project code sharing would be a requirement to keep things dry, so Begin applications share code via `src/shared/` and `src/views/` dirs ([learn more here](/en/guides/tutorials/code-sharing-across-functions))
-- In practice, this looks a lot like a microservices-based architecture, except now it has the advantage of being reflected in how your app runs in the cloud
+- Of course, intra-project code sharing would be a requirement to keep things dry, so Architect applications share code via `src/shared/` and `src/views/` directories ([learn more here](/en/guides/tutorials/code-sharing-across-functions))
+- In practice, this looks a lot like a micro-services-based architecture, except now it has the advantage of being reflected in how your app runs in the cloud
 - This also has the added benefit of massively aiding debugging – no more grepping through your entire application's logs, just look at the cloud function in which you've got the bug!
 
 ## Tutorial example

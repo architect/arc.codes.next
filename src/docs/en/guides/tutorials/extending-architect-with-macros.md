@@ -193,7 +193,7 @@ module.exports = function validateStorage (storage) {
 That might seem like a lot at first, but Architect uses your .arc file in a very similar way to generate CloudFormation on your behalf. When you want to get your hands dirty with direct CloudFormation templates, a Macro will be your best friend.
 
 5. Dry run and final deploy
-When using custom macros to alter CloudFormation, or even checking the CFN output, you can deploy with `--dry-run` flag to see the resulting `sam.json`. When you're ready to deploy, run `arc deploy` and go take a look at all those lovely S3 buckets that were created on your behalf. 
+When using custom macros to alter CloudFormation, or even checking the output, you can deploy with `--dry-run` flag to see the resulting `sam.json`. When you're ready to deploy, run `arc deploy` and go take a look at all those lovely S3 buckets that were created on your behalf. 
 
 
 If you'd like to use this macro, you can include it with `npm install @architect/macro-storage-public` and you can find it's documentation here: [https://github.com/architect/macro-storage-public](https://github.com/architect/macro-storage-public)

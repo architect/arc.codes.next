@@ -13,14 +13,13 @@ sections:
 Architect provides several primitives for your application which work out of the box. However, you can still access other AWS services with macros which modify the CloudFormation stack when your project is deployed. Any service that supports CloudFormation can be provisioned with a macro. Architect macros are JavaScript functions that are given a parsed `.arc` file, a target CloudFormation template, and a stage. It returns a new CloudFormation template with your custom resources attached, which will then be deployed. This pattern allows for Architect to even extend itself! 
 
 ## CloudFormation
-CloudFormation 
 CloudFormation provides a common language for developers to model and provision AWS resources and services. Many, but not all services are given some level of control with CloudFormation. Architect parses the `.arc` file and ultimately produces a CloudFormation stack. This stack tells AWS what you need and how it should be configured. Using services that are outside of the Architect app primitives will require a macro to instantiate.
 
 
 ## Deploy custom resources with determinism
 In this tutorial we will go over a macro to create any number of S3 buckets with public permissions. Often we need more S3 buckets to hold objects or other artifacts. Using a macro will create buckets with determinism that are always available, but not directly managed by you.
 
-If you want to just use this macro, [follow the install instructions on Github](https://github.com/architect/macro-storage-public/blob/master/index.js).
+If you want to just use this macro, [follow the install instructions on GitHub](https://github.com/architect/macro-storage-public/blob/master/index.js).
 
 ## Example - Provision public S3 buckets
 1. We will start with a fresh project that we can create from the terminal
@@ -29,7 +28,7 @@ mkdir arc-macro
 cd arc-macro
 arc init
 ```
-2. Now let's add a [utility library](https://github.com/architect/utils/blob/master/to-logical-id/index.js) that we can use to convert `.arc` dash-case-stuff into PascalCaseStuff.
+2. Now let's add a [utility library](https://github.com/architect/utils/blob/master/to-logical-id/index.js).
 ```bash
 npm init -y
 npm install @architect/utils

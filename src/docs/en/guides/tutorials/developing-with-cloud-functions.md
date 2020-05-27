@@ -4,6 +4,7 @@ description: 160 (or fewer) character description of this document!
 sections:
   - Overview
   - Principles & best practices
+  - Helpers for your functions
   - Tutorial example
 ---
 
@@ -43,6 +44,8 @@ With Architect, your app deploys instantly, you pay only for what you use, and y
 
 Cloud function apps embody the dream we've been promised of the cloud for decades. With these new superpowers comes new considerations.
 
+---
+
 ## Principles & best practices
 
 ### Statelessness between invocations
@@ -63,12 +66,225 @@ Cloud functions start and run fastest when they're small and discrete.
 - In practice, this looks a lot like a micro-services-based architecture, except now it has the advantage of being reflected in how your app runs in the cloud
 - This also has the added benefit of massively aiding debugging – no more grepping through your entire application's logs, just look at the cloud function in which you've got the bug!
 
+### Requests as Input
+
+By default, HTTP functions are dependency free with a minimal, but very powerful, low level API. Every HTTP function receives a plain JavaScript `Object` called `request` as a first parameter.
+
+`request` has the following keys:
+
+- **`body`:** receives `Object` - request body, including an `Object` containing any `application/x-www-form-urlencoded` form variables
+- **`path`:** receives `string` - absolute path of the request
+- **`method`:** receives `string` - one of `GET`, `POST`, `PATCH`, `PUT` and `DELETE`
+- **`params`:** receives `Object` - any URL params, if defined in your function's path (i.e. `get /:foo/bar`)
+- **`query`:** receives `Object` - any query params, if present
+- **`headers`:** receives `Object` - contains all client request headers 
+
+Routes also get the AWS [`context`](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html) `Object` as a second argument, which can be used for performance optimization and other tricks, but most routes don't use it. 
+
+### Return a response
+
+To send a response, HTTP functions return a plain JavaScript `Object` with the following params:
+
+- **`status`:** (or **`code`**) receives `number` - sets the HTTP status code
+- **`type`:** receives `string` - sets the `Content-Type` response header
+- **`body`:** receives `string` - sets the response body
+- **`location`:** receives `string` - sets the `Location` response header (combine with `status: 302` to redirect)
+- **`cookie`:** receives `string` - sets the `Set-Cookie` response header
+- **`cors`:** receives `boolean` - sets the various CORS headers
+
+`@architect/functions` (optionally) adds additional useful tools for working with HTTP, including middleware, sessions, and more.
+
+### Code sharing
+
+Code sharing across your project's functions is implemented using `src/shared` directory. For example, this can be useful for shared layouts. Create the following file:
+
+```javascript
+// src/shared/layout.js
+module.exports = function layout(html) {
+  return `
+    <!doctype html>
+    <html>
+      <body><h1>Layout!</h1>${html}</body>
+    </html>
+  `
+}
+```
+
+And now you can reference it from any other function:
+
+```javascript
+// src/http/get-index/index.js
+let layout = require('@architect/shared/layout')
+
+module.exports = async function http(req) {
+  let html = '<b>hello world!!</b>'
+  return {
+    type: 'text/html',
+    body: layout(html)
+  }
+}
+```
+
+> Read more about [sharing common code in Architect](/en/guides/tutorials/code-sharing-across-functions)
+
+---
+
+## Helpers for your functions
+
+HTTP functions come with `@architect/functions` and `@architect/data` installed. These have convenient helpers for working with API Gateway and DynamoDB, respectively.
+
+```javascript
+// opt into architect functions and data conveniences
+let arc = require('@architect/functions')
+let data = require('@architect/data')
+```
+
+In the example below we'll use some of the helpers from  `@architect/functions`:
+ 
+- [`arc.middleware`](/en/reference/runtime-helper-reference) - middleware API, allowing requests to be filtered through multiple steps before sending a response.
+- [`arc.http.session`](/en/reference/arc.http.helpers) - read the session using the request cookie, write the session returning a cookie string
+- [`arc.http.helpers.url`](/guides/urls) - transform `/` into the appropriate `staging` and `production` API Gateway paths
+- [`arc.http.helpers.static`](/guides/static-assets) - accepts a path part and returns path to `localhost:3333` or `staging` and `production` S3 buckets
+- `arc.http.helpers.verify` - verify a `csrf` token
+
+---
+
 ## Tutorial example
 
 ### Create full-featured web applications composed of fast, tiny HTTP functions
 
-Here we'll start from a basic 'hello world' app and then build a bigger app with signups and logins. 
+Here we'll start from a basic 'hello world' app example and then build a bigger app with signups and logins. 
 
-We'll do this with AWS Lambdas - small functions that trigger when their URL is hit. You can think of lambdas as the equivalent of 'routes' in traditional web apps. 
+We'll do this using **AWS Lambdas** (small functions that trigger when their URL is hit.) You can think of lambdas as the equivalent of 'routes' in traditional web apps. 
 
-AWS Lambdas are accessed via API Gateway, but `.arc` abstracts API Gateway and Lambda configuration and provisioning. 
+AWS Lambdas are accessed via API Gateway, but `.arc` abstracts API Gateway and Lambda configuration and provisioning so that creating a lambda function is a smooth and seamless experience.
+
+### Hello world
+
+Let's begin by provisioning a lambda function that will serve as the root of our app and give a simple `hello world` HTML response. 
+
+Given the following example `.arc` file:
+
+```bash
+@app
+testapp
+
+@http
+get /
+```
+
+When a user visits `/`, the following HTTP function in `src/http/get-index/index.js` will run: 
+
+```javascript
+exports.handler = async function http(request) {
+  return {
+    status: 201,
+    type: 'text/html; charset=utf8',
+    body: `
+      <!doctype html>
+      <html>
+        <body>hello world</body>
+      </html>
+   `
+  }
+}
+```
+
+### 404 handling
+
+404s are handled by `/src/http/get-index`. You can intercept the requests and show an error page:
+
+```javascript
+// Route handles 404s
+const notFound = async function http(request) {
+  if (request.path !== "/") {
+    return {
+      status: 404,
+      type: 'text/html; charset=utf8',
+      body: `<b>${request.path} not found</b>` 
+    }
+  }
+}
+```
+
+Then fall back to the regular home page:
+
+```javascript
+// Regular route for GET /
+const showHomepage = async function http(request) {
+  return {
+    type: 'text/html; charset=utf8'
+    body: `<b>hello world</b>` 
+  }
+}
+```
+
+Use middleware to combine the lambdas:
+
+```javascript
+// Combine the handlers together using Arc middleware
+exports.handler = arc.http.middleware(notFound, showHomepage)
+```
+
+### Redirect
+
+A redirect writing to the `session`:
+
+```javascript
+// src/http/post-login/index.js
+let arc = require('@architect/functions')
+
+exports.handler = async function http(req) {
+  let loggedIn = req.body.email === 'admin' && req.body.password === 'admin'
+  let cookie = await arc.http.session.write({loggedIn})
+  return {
+    cookie,
+    status: 302,
+    location: '/'
+  }
+}
+```
+
+### Clearing sessions
+
+A `302` response clearing the requester's session data:
+
+```javascript
+// src/http/get-logout/index.js
+let arc = require('@architect/functions')
+
+exports.handler = async function http(req) {
+  let cookie = await arc.http.session.write({})
+  return {
+    cookie,
+    status: 302,
+    location: '/'
+  }
+}
+```
+
+### A `500` response:
+
+```javascript
+// src/http/get-some-broken-page/index.js
+exports.handler = async function http(req) {
+  return {
+    type: 'text/html',
+    status: 500,
+    body: 'internal serverless error'
+  }
+}
+```
+
+### JSON API endpoint
+
+```javascript
+// src/http/get-cats/index.js
+exports.handler = async function http(req) {
+  return {
+    type: 'application/json',
+    status: 201,
+    body: JSON.stringify({cats: ['sutr0']})
+  }
+}
+```

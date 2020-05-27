@@ -86,7 +86,7 @@ let reference = [
       'arc.events',
       'arc.http',
       'arc.http.async',
-      'arc.htt.helpers',
+      'arc.http.helpers',
       'arc.http.proxy',
       'arc.http.session',
       'arc.queues',

@@ -11,17 +11,16 @@ sections:
 
 ## Overview
 
-ADD ME!
-
+This section is about setting up your local development environment and a testing suite within your Architect app.
 
 ## Previewing vs. testing
 
-Arc targets two use cases:
+Architect targets two use cases:
 
 1. **Previewing** - code runs locally and can be opened in a web browser
 2. **Testing** - code runs headlessly in a terminal
 
-Following the [quickstart](/en/guides/get-started/quickstart) you should have everything wired up so `npx sandbox` kicks up a local web server and creates tables and indexes defined in `.arc` for previewing work. 
+Follow the [quickstart](/en/guides/get-started/quickstart) to get everything wired up. `npx sandbox` kicks up a local web server and creates tables and indexes defined in your `.arc` file for previewing work. 
 
 If you want to write tests (and we very much think you should!) against the infra without deployment you'll need to set up the `sandbox` as a module.
 
@@ -76,14 +75,14 @@ Add the following to `package.json`:
 - Setup `AWS_PROFILE` and `AWS_REGION` per the [installation guide](/en/guides/aws/configuration)
 - `NODE_ENV=testing` is VERY important to add to your `npm test` scripts regardless of the test framework you are using--- you MUST include it or you will have a bad time
 
-> ✨ Tip: while you can use any test runner and reporter combo you want, the TAP family is strongly recommended; test suites that require test runners to inject globals create difficult-to-debug situations
+> ✨ Tip: while you can use any test runner and reporter combo you want, the [TAP family](https://testanything.org/) is strongly recommended; test suites that require test runners to inject globals create difficult-to-debug situations.
 
 Scaffold your two test files with an environment check; this a good practice to get the testing muscles warmed up.
 
 ```javascript
 // tests/http-test.js
-var test = require('tape')
-var arc = require('@architect/architect')
+let test = require('tape')
+let arc = require('@architect/architect')
 
 test('env', t=> {
   t.plan(1)
@@ -93,8 +92,8 @@ test('env', t=> {
 
 ```javascript
 // tests/db-test.js
-var test = require('tape')
-var arc = require('@architect/architect')
+let test = require('tape')
+let arc = require('@architect/architect')
 
 test('env', t=> {
   t.plan(1)
@@ -112,9 +111,9 @@ In order to test HTTP routes we will need an HTTP client. Lets use [tiny-json-ht
 
 ```javascript
 // tests/http-test.js
-var test = require('tape')
-var tiny = require('tiny-json-http')
-var arc = require('@architect/architect')
+let test = require('tape')
+let tiny = require('tiny-json-http')
+let arc = require('@architect/architect')
 
 test('env', t=> {
   t.plan(1)
@@ -161,17 +160,17 @@ In an `.arc` defined project `NODE_ENV` is used for knowing where the code is ru
 
 ```javascript
 // tests/db-test.js
-var AWS = require('aws-sdk')
-var endpoint = new AWS.Endpoint('http://localhost:5000')
-var db = process.env.NODE_ENV === 'testing'? new AWS.DynamoDB({endpoint}) : new AWS.DynamoDB
+let AWS = require('aws-sdk')
+let endpoint = new AWS.Endpoint('http://localhost:5000')
+let db = process.env.NODE_ENV === 'testing'? new AWS.DynamoDB({endpoint}) : new AWS.DynamoDB
 
-var test = require('tape')
-var arc = require('@architect/architect')
+let test = require('tape')
+let arc = require('@architect/architect')
 
 /**
  * first we need to start the local db server and grab a reference to the client
  */
-var client 
+let client 
 test('arc.sandbox.db.start', t=>{
   t.plan(1)
   client = arc.sandbox.db.start(xxx=> t.ok(true, 'started'))
@@ -201,5 +200,6 @@ test('arc.sandbox.db.close', t=>{
   t.ok(true, 'closed')
 })
 ```
-> 🔭 Get the source for this example [architect/arc-example-working-locally](https://github.com/architect/arc-example-working-locally)
+<!-- Keeping this link below in case we update this repo for this guide -->
 
+> 🔭 Get the source for this example [architect/arc-example-working-locally](https://github.com/architect/arc-example-working-locally)

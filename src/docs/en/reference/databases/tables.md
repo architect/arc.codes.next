@@ -15,7 +15,7 @@ Architect `@tables` defines DynamoDB tables and `@indexes` define global seconda
 
 > Read the official [AWS docs on DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)
 
-**Topics**
+**Sections**
 [Getting started](#getting-started)
 [Encryption](#encryption)
 [IAM Permissions](#iam-permissions)

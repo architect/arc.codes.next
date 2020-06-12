@@ -8,20 +8,23 @@ sections:
 
 ## Overview
 
-Durable persistence of structured data is the foundation of most applications. `@architect/data` is a very thin wrapper for `DynamoDB` and `DynamoDB.DocumentClient` that reads a `.arc` file and returns a client for creating, modifying, deleting and querying data from DynamoDB (aka Dynamo).
+Durable persistence of structured data is the foundation of most applications. `@architect/data` is a very thin wrapper for `DynamoDB` and `DynamoDB.DocumentClient` that reads a `.arc` file and returns a client for creating, modifying, deleting and querying data from DynamoDB!
 
 In this tutorial you will build a simple note taking application, with multiple users, authentication, and data storage with `@architect/data`.
 
-The example below is also [available on GitHub.](https://github.com/architect/arc-example-notes)
+> The example below is also [available on GitHub.](https://github.com/architect/arc-example-notes)
 
 
 **Sections**
 [Generating the Data Layer](#generating-the-data-layer)
-[Database Sessions](#database-sessions)
-[WebSocket sessions](#websocket-sessions)
-[Strong Key](#strong-key)
-[Common Session Use Cases](#common-session-use-cases)
-[Example](#example)
+[Implementing an Admin Interface](#implementing-an-admin-interface)
+[Implementing Signup](#implementing-signup)
+[Implementing Login](#implementing-login)
+[Implementing Logout](#implementing-logout)
+[Protecting Routes](#protecting-routes)
+[Showing and making notes](#showing-and-making-notes)
+[Edit a specific note](#edit-a-specific-note)
+[Delete a Note](#delete-a-note)
 
 ---
 
@@ -64,6 +67,8 @@ So, at this point, `npx create` will create the following Dynamo tables:
 - `testapp-production-people`
 - `testapp-staging-notes`
 - `testapp-production-notes`
+
+---
 
 ## Implementing an Admin Interface
 
@@ -157,6 +162,7 @@ exports.handler = async function http(request) {
   }
 }
 ```
+---
 
 ## Implementing Signup
 
@@ -299,6 +305,8 @@ Extra credit:
 - Sanitize inputs with XSS
 - Validate input; you probably can do without a library
 
+---
+
 ## Implementing Login
 
 Let's make a login page. It's just a form:
@@ -429,6 +437,7 @@ module.exports = async function authenticatePerson(email, suppliedPassword) {
 
 If `authenticatePerson` returns a user, `src/http/post-login/index.js` will redirect to `/notes`. Otherwise we'll send the user back to the login page - with `atttemptedUser` added to their session so we can tell the user they failed.
 
+---
 
 ## Implementing Logout
 
@@ -453,6 +462,7 @@ exports.handler = async function route(request) {
 
 This wipes the current session and redirects back to `/`.
 
+---
 
 ## Protecting Routes
 
@@ -497,6 +507,7 @@ module.exports = async function requireLogin(request) {
 
 > 🏄‍♀️ Read more about [middleware](https://arc.codes/guides/middleware).
 
+---
 
 ## Showing and making notes 
 
@@ -664,6 +675,7 @@ exports.handler = arc.middleware(requireLogin, route)
 
 Now as we add notes, we can see them in our UI!
 
+---
 
 ## Edit a specific note 
 
@@ -780,6 +792,7 @@ Now running `npx repl` opens a REPL into your Dynamo schema running locally and 
 
 Try starting the REPL and running: `data.notes.scan({}, console.log)` to see all the current notes. The REPL can attach itself to the `staging` and `production` databases also by setting the appropriate `NODE_ENV` environment variable flag. 
 
+---
 
 ## Delete a Note
 

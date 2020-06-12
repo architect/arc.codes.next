@@ -31,6 +31,7 @@ Backends
 Base64
 base64-encoded
 bashrc
+bcrypt
 birb
 blockchain
 Blockquoted
@@ -115,6 +116,7 @@ frontend
 globals
 hardcode
 hardcoding
+hashids
 headless
 headlessly
 hostname

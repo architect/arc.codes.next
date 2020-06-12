@@ -30,7 +30,15 @@ In this tutorial you will build a simple note taking application, with multiple 
 
 ## Generating the Data Layer
 
-Given the following `.arc` file:
+Let's first create a fresh Architect project and change directories into the project folder. 
+
+```bash
+mkdir arc-example-notes
+cd arc-example-notes
+touch .arc
+```
+
+Then we'll add the following to our `.arc` file:
 
 ```bash
 @app
@@ -59,9 +67,9 @@ notes
   noteID **String
 ```
 
-Running `npx create` will generate routes and tables to model our persistence needs. The `people` table defined above will have an `email` [partition key](https://aws.amazon.com/blogs/database/choosing-the-right-dynamodb-partition-key/), while the `notes` table will have an `email` partition key and a unique `noteID`. This is one way to model a "many-to-many" relationship in Dynamo. 
+Running `arc init` will generate routes and tables to model our persistence needs. The `people` table defined above will have an `email` [partition key](https://aws.amazon.com/blogs/database/choosing-the-right-dynamodb-partition-key/), while the `notes` table will have an `email` partition key and a unique `noteID`. This is one way to model a "many-to-many" relationship in Dynamo. 
 
-So, at this point, `npx create` will create the following Dynamo tables:
+So, at this point, `arc init` will create the following Dynamo tables:
 
 - `testapp-staging-people`
 - `testapp-production-people`
@@ -72,28 +80,29 @@ So, at this point, `npx create` will create the following Dynamo tables:
 
 ## Implementing an Admin Interface
 
-Now let's create a basic interface for this notes app. First, let's create a basic shared layout in `src/views`, which will make it available to all functions (more on [sharing code across functions here](/en/guides/tutorials/code-sharing-across-functions)):
+Now let's create a basic interface for this notes app. First, let's create a basic shared layout in `src/shared`, which will make it available to all functions (more on [sharing code across functions here](/en/guides/tutorials/code-sharing-across-functions)):
 
 ```bash
-mkdir src/shared/views
-touch src/shared/views/layout.js
+mkdir src/shared
+touch src/shared/layout.js
 ```
 
 ```javascript
+// src/shared/layout.js
+
 let arc = require('@architect/functions'),
-  stylesheet = arc.http.helpers.static('/css/style.css'),
   url = arc.http.helpers.url,
   static = arc.http.helpers.static
 
 module.exports = function layout(contents, showNav = true, isLoggedIn = true) {
   var nav = ''
 
-  var loginLinks = `
+  var navLinks = `
 		<a class="button subtle" href="${url('/login')}">Log in</a>
 		<a class="button" href="${url('/signup')}">Sign up</a>
 	`
   if (isLoggedIn) {
-    loginLinks = `
+    navLinks = `
 			<a class="button subtle" href="${url('/logout')}">Log out</a>
 		`
   }
@@ -101,9 +110,11 @@ module.exports = function layout(contents, showNav = true, isLoggedIn = true) {
   if (showNav) {
     nav = `
 			<nav>
-				<a href="/"><img class="logo" src="${static('/images/logo.svg')}"/></a>
+				<a href="/">
+					<img class="logo" src="${static('/images/logo.svg')}"/>
+				</a>
 				<a href="https://arc.codes" target="_blank">Documentation</a>
-				${loginLinks}
+				${navLinks}
 			</nav>`
   }
 
@@ -111,7 +122,10 @@ module.exports = function layout(contents, showNav = true, isLoggedIn = true) {
 	<html>
 	<head>
 		<title>Architect demo app</title>
-		<link rel=stylesheet href="${stylesheet}">
+		<link rel=stylesheet href="${static('/css/style.css')}">
+		<link rel="icon" type="image/png" sizes="16x16" href="${static('/images/architect-favicon-16.png')}">
+		<link rel="icon" type="image/png" sizes="32x32" href="${static('/images/architect-favicon-32.png')}">
+		<link rel="icon" type="image/png" sizes="64x64" href="${static('/images/architect-favicon-64.png')}">
 	</head>
 	<body>	
 		${nav}
@@ -122,15 +136,18 @@ module.exports = function layout(contents, showNav = true, isLoggedIn = true) {
 }
 ```
 
-The layout module itself a `contents`, plus two options: whether to show navigation, and whether we're logged in. It returns an HTML document as a string. Truly, string interpolation is the purest essence of web development. We add some basic CSS too. 
+The layout module has a params of `contents`, plus two options: whether to show navigation, and whether we're logged in. It returns an HTML document as a string. String interpolation is truly the purest essence of web development. We add some basic CSS too. 
 
-Next, use the layout into your home route. We'll show different contents if someone is logged in or not:
+Next, we require the layout module in the root of our application. This will show different contents based on whether someone is logged in or not:
 
 ```javascript
 // src/http/get-index/index.js
+
 let arc = require('@architect/functions'),
-  layout = require('@architect/views/layout'),
+  layout = require('@architect/shared/layout'),
   url = arc.http.helpers.url
+
+require('@architect/shared/globals')
 
 exports.handler = async function http(request) {
   let state = await arc.http.session.read(request)
@@ -138,7 +155,7 @@ exports.handler = async function http(request) {
 
   let isLoggedIn = !!state.person
 
-  let loggedInPage = `
+  var loggedInPage = `
     <section class="hero">
       <h1>Welcome back <strong>${email}</strong>!</h1>	
       <h2>You've logged in. That's so cool.</p>
@@ -146,7 +163,7 @@ exports.handler = async function http(request) {
     </hero>
   `
 
-  let notLoggedInPage = `
+  var notLoggedInPage = `
     <section class="hero">
       <h1>Welcome to the Architect demo app!</h1>	
       <h2>It looks like it's your first time here. You should <a href="${url('/signup')}">sign up</a> now!</p>
@@ -155,9 +172,9 @@ exports.handler = async function http(request) {
   `
   let contents = isLoggedIn ? loggedInPage : notLoggedInPage
 
-    return {
-    type: 'text/html',
-    status: 200,
+  return {
+    type: HTML,
+    status: OK,
     body: layout(contents, true, isLoggedIn)
   }
 }
@@ -170,10 +187,13 @@ Our signup page is a simple form:
 
 ```javascript
 // src/http/get-signup/index.js
+
 let arc = require('@architect/functions'),
-  layout = require('@architect/views/layout'),
+  layout = require('@architect/shared/layout'),
   url = arc.http.helpers.url,
-  logo = arc.http.helpers.static('images/logo.svg')
+  static = arc.http.helpers.static
+
+require('@architect/shared/globals')
 
 exports.handler = async function http(req) {
   let state = await arc.http.session.read(req)
@@ -190,7 +210,7 @@ exports.handler = async function http(req) {
     <body class="signup-page dark">
       <form class="signup" method="post" action=${url('/signup')}>
       
-        <a href="/"><img class="logo" src="${logo}"/></a>
+        <a href="/"><img class="logo" src="${static('/images/logo.svg')}"/></a>
         <h2>Sign up</h2>
         
         <p>Enter an email and password to sign up</p>
@@ -219,17 +239,18 @@ exports.handler = async function http(req) {
   `
 
   return {
-    type: 'text/html',
-    status: 200,
+    type: HTML,
+    status: OK,
     body: layout(signupPage, false)
   }
 }
 ```
 
-The signup will be processed by our `post-signup` lambda, which will make a person in DynamoDB:
+The signup will be processed by our `post-signup` lambda, which will create a user in DynamoDB:
 
 ```javascript
 // src/http/post-signup/index.js
+
 let arc = require('@architect/functions'),
   makePerson = require('./make-person.js'),
   log = console.log.bind(console),
@@ -244,16 +265,17 @@ exports.handler = async function http(request) {
   let cookie = await arc.http.session.write(session)
   return {
     cookie,
-    status: 302,
+    status: MOVED_TEMPORARILY,
     location: url('/notes')
   }
 }
 ```
 
-`make-person.js` uses the popular `bcrypt` tool to store a hashed version of the password in DynamoDB:
+`make-person.js` uses the popular [bcrypt](https://github.com/kelektiv/node.bcrypt.js) tool to store a hashed version of the password in DynamoDB:
 
 ```javascript
 // src/http/post-signup/make-person.js
+
 let data = require('@architect/data'),
   bcrypt = require('bcrypt'),
   log = console.log.bind(console)
@@ -263,11 +285,10 @@ const SALT_ROUNDS = 12
 module.exports = async function makePerson(email, suppliedPassword) {
   let hashedPassword = await bcrypt.hash(suppliedPassword, SALT_ROUNDS)
   let person = {email, password: hashedPassword}
-  await data.people.put(person)
+  data.people.put(person)
   log(`Created person ${email}`)
   return person
 }
-
 ```
 
 Requiring `@architect/data` reads your app's `.arc` manifest and generates a data access client from it. Working with `.arc` this way means:
@@ -313,10 +334,13 @@ Let's make a login page. It's just a form:
 
 ```javascript
 // src/http/get-login/index.js
-let arc = require('@architect/functions')
-let layout = require('@architect/views/layout')
-let url = arc.http.helpers.url
-let logo = arc.http.helpers.static('images/logo.svg')
+
+let arc = require('@architect/functions'),
+  layout = require('@architect/shared/layout'),
+  url = arc.http.helpers.url,
+  static = arc.http.helpers.static
+
+require('@architect/shared/globals')
 
 exports.handler = async function http(req) {
   let state = await arc.http.session.read(req)
@@ -339,14 +363,14 @@ exports.handler = async function http(req) {
     <body class="signup-page dark">
       <form class="login" method="post" action=${url('/login')} >
       
-        <a href="/"><img class="logo" src="${logo}"/></a>
+        <a href="/"><img class="logo" src="${static('/images/logo.svg')}"/></a>
 
         <h2>Please log in below!</h2>	
 
         <div class="flash-message ${message ? '' : 'no-messages'}">${message || ''}</div>
     
         <div class="input-and-label">
-          <input name="email" required="required" type="email" autocomplete="off" value="${state.attemptedEmail}" placeholder="Email address" autofocus/>
+          <input name="email" required="required" type="email" autocomplete="off" value="${state.attemptedEmail || ''}" placeholder="Email address" autofocus/>
           <label for="email">Email address</label>
         </div>
     
@@ -366,21 +390,23 @@ exports.handler = async function http(req) {
   let content = state.person ? loggedInPage : notLoggedInPage
 
   return {
-    type: 'text/html',
-    status: 200,
+    type: HTML,
+    status: OK,
     body: layout(content, false)
   }
 }
-
 ```
 
 When people fill in the form, we'll process it, sending the request to `'./authenticate-person.js`:
 
 ```javascript
 // src/http/post-login/index.js
+
 let arc = require('@architect/functions'),
   authenticatePerson = require('./authenticate-person.js'),
   url = arc.http.helpers.url
+
+require('@architect/shared/globals')
 
 exports.handler = async function http(request) {
   let session = await arc.http.session.read(request)
@@ -396,7 +422,7 @@ exports.handler = async function http(request) {
   let cookie = await arc.http.session.write(session)
   return {
     cookie,
-    status: 302,
+    status: MOVED_TEMPORARILY,
     location
   }
 }
@@ -406,6 +432,7 @@ The authentication queries DynamoDB to find a `person` with the email specified,
 
 ```javascript
 // src/http/post-login/authenticate-person.js
+
 let data = require('@architect/data'),
   bcrypt = require('bcrypt'),
   log = console.log.bind(console)
@@ -432,7 +459,6 @@ module.exports = async function authenticatePerson(email, suppliedPassword) {
   log(`Failed login attempt as ${email}`)
   return null
 }
-
 ```
 
 If `authenticatePerson` returns a user, `src/http/post-login/index.js` will redirect to `/notes`. Otherwise we'll send the user back to the login page - with `atttemptedUser` added to their session so we can tell the user they failed.
@@ -445,8 +471,11 @@ We'll implement the logout handler too:
 
 ```javascript
 // src/http/get-logout/index.js
+
 let arc = require('@architect/functions')
 let url = arc.http.helpers.url
+
+require('@architect/shared/globals')
 
 exports.handler = async function route(request) {
   let session = await arc.http.session.read(request)
@@ -454,7 +483,7 @@ exports.handler = async function route(request) {
   let cookie = await arc.http.session.write(session)
   return {
     cookie,
-    status: 302,
+    status: MOVED_TEMPORARILY,
     location: url('/')
   }
 }
@@ -466,7 +495,7 @@ This wipes the current session and redirects back to `/`.
 
 ## Protecting Routes
 
-To ensure no bad actors start posting notes, we can lock down the other routes using Arc's [middleware](https://arc.codes/guides/middleware). 
+To ensure no bad actors start posting notes, we can lock down the other routes using Arc's [middleware](/en/guides/tutorials/cloud-function-middleware). 
 
 ```bash
 touch src/shared/require-login.js
@@ -482,6 +511,7 @@ Later in the guide we'll incorporate this into routes we want to protect.
 
 ```javascript
 // src/shared/require-login.js
+
 let arc = require('@architect/functions'),
   log = console.log.bind(console),
   url = arc.http.helpers.url
@@ -502,10 +532,9 @@ module.exports = async function requireLogin(request) {
   console.log(`We're logged in as ${state.person.email}`)
   // return nothing, so middleware processing continues
 }
-
 ```
 
-> 🏄‍♀️ Read more about [middleware](https://arc.codes/guides/middleware).
+> 🏄‍♀️ Read more about [middleware](/en/guides/tutorials/cloud-function-middleware) here.
 
 ---
 
@@ -517,12 +546,15 @@ At the bottom you'll notice we're using `arc.middleware` to combine this route w
 
 ```javascript
 // src/http/get-notes/index.js
+
 let arc = require('@architect/functions'),
-  layout = require('@architect/views/layout'),
+  layout = require('@architect/shared/layout'),
   requireLogin = require('@architect/shared/require-login'),
   getNotes = require('./get-notes.js'),
   log = console.log.bind(console),
   url = arc.http.helpers.url
+
+require('@architect/shared/globals')
 
 async function showProtectedPage(request) {
   log(`Showing notes`)
@@ -577,20 +609,20 @@ async function showProtectedPage(request) {
   `
 
   return {
-    status: 200,
+    status: OK,
     body: layout(contents, true, true),
-    type: 'text/html'
+    type: HTML
   }
 }
 
 exports.handler = arc.middleware(requireLogin, showProtectedPage)
-
 ```
 
 The DynamoDB work is done by `get-notes.js` which is a simple query for all notes for that `email`:
 
 ```javascript
 // src/http/get-notes/get-notes.js
+
 let data = require('@architect/data'),
   log = console.log.bind(console)
 
@@ -607,10 +639,9 @@ module.exports = async function getNotes(email) {
   var notes = result.Items
   return notes
 }
-
 ```
 
-Now that we've got the form, let's implement the POST handler. We'll use the `hashids` library to help create keys for our notes.
+Now that we've got the form, let's implement the POST handler. We'll use the [hashids](https://hashids.org/) library to help create keys for our notes.
 
 ```bash
 cd src/http/post-notes
@@ -619,6 +650,7 @@ npm i hashids
 
 ```javascript
 // src/http/post-notes/make-note.js
+
 let Hashids = require('hashids'),
   data = require('@architect/data'),
   log = console.log.bind(console),
@@ -645,10 +677,13 @@ And then in the handler:
 
 ```javascript
 // src/http/post-notes/index.js
+
 let arc = require('@architect/functions'),
   makeNote = require('./make-note.js'),
   requireLogin = require('@architect/shared/require-login'),
   url = arc.http.helpers.url
+
+require('@architect/shared/globals')
 
 async function route(request) {
   try {
@@ -664,13 +699,12 @@ async function route(request) {
     console.log(error)
   }
   return {
-    status: 302
+    status: MOVED_TEMPORARILY,
     location: url('/notes')
   }
 }
 
 exports.handler = arc.middleware(requireLogin, route)
-
 ```
 
 Now as we add notes, we can see them in our UI!
@@ -687,11 +721,14 @@ This is just another lambda that returns two forms. Like always, we use middlewa
 
 ```javascript
 // src/http/get-notes-000noteID/index.js
+
 let arc = require('@architect/functions'),
-  layout = require('@architect/views/layout'),
+  layout = require('@architect/shared/layout'),
   requireLogin = require('@architect/shared/require-login'),
   data = require('@architect/data'),
   url = arc.http.helpers.url
+
+require('@architect/shared/globals')
 
 async function showNote(request) {
   let noteID = request.params.noteID
@@ -736,26 +773,27 @@ async function showNote(request) {
   }
 
   return {
-    status: 200,
+    status: OK,
     body: layout(showNote(note)),
-    type: 'text/html'
+    type: HTML
   }
 }
 
 exports.handler = arc.middleware(requireLogin, showNote)
-
 ```
-
 
 Next let's implement the update action:
 
 ```javascript
 // src/http/post-notes-000noteID/index.js
+
 let arc = require('@architect/functions'),
   requireLogin = require('@architect/shared/require-login'),
   url = arc.http.helpers.url,
   data = require('@architect/data'),
   log = console.log.bind(console)
+
+require('@architect/shared/globals')
 
 let editNote = async function route(request) {
   try {
@@ -772,7 +810,7 @@ let editNote = async function route(request) {
     log(error)
   }
   return {
-    status: 302,
+    status: MOVED_TEMPORARILY,
     location: url('/notes')
   }
 }
@@ -800,6 +838,7 @@ Finally, let's implement a delete route:
 
 ```javascript
 // src/http/post-notes-000noteID-delete/index.js
+
 let arc = require('@architect/functions'),
   data = require('@architect/data'),
   url = arc.http.helpers.url,
@@ -825,7 +864,7 @@ let deleteNote = async function route(request) {
     email
   })
   return {
-    status: 302,
+    status: MOVED_TEMPORARILY,
     location: url('/notes')
   }
 }

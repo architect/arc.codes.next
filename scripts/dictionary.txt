@@ -95,6 +95,7 @@ DocumentClient
 DocumentDB
 DS_Store
 Dyn
+dynalite
 DynamoDB
 DynamoDB.
 easyDNS
@@ -109,6 +110,7 @@ eslint
 esmodules
 eval
 EventBridge
+falsy
 filesystem
 filetype
 FQDN

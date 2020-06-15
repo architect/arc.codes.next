@@ -8,10 +8,10 @@ sections:
 ---
 
 ## Overview
-Architect dev server: run full Architect projects locally & offline in a sandbox. Sandbox is an http server and an in-memory database that runs your Architect project locally and offline. It emulates most of the application services defined in the `.arc` file. Beyond HTTP traffic, Sandbox can also emulate serverless WebSockets, SNS events, and SQS queues.
+Architect dev server: run full Architect projects locally & offline in a sandbox. Sandbox is a HTTP server and an in-memory database that runs your Architect project locally and offline. It emulates most of the application services defined in the `.arc` file. Beyond HTTP traffic, Sandbox can also emulate serverless WebSockets, SNS events, and SQS queues.
 Starts a local web server and in-memory database for previewing code defined by `.arc`.
 
-[Source code is available on Github](https://github.com/architect/sandbox/)
+[Source code is available on GitHub](https://github.com/architect/sandbox/)
 
 ## Command Line Usage and Flags
 Sandbox can be called directly from the command line, `arc sandbox`, or a JavaScript API. This makes it a great environment to preview work and invoke functions during automated testing.
@@ -51,7 +51,7 @@ By default, Sandbox is run in verbose mode. You can explicitly use [-v, --verbos
 
 
 ### Local Database
-Sandbox creates an in-memory instance of [Dynalite](https://github.com/mhart/dynalite) with `@tables` and `@indexes` found in the `.arc` file. When Sandbox is terminated, any data written is cleared from memory. The default endpoint is `http://localhost:5000`. You can set a custom port by using an environment variable, `ARC_TABLES_PORT=5555`
+Sandbox creates an in-memory instance of [dynalite](https://github.com/mhart/dynalite) with `@tables` and `@indexes` found in the `.arc` file. When Sandbox is terminated, any data written is cleared from memory. The default endpoint is `http://localhost:5000`. You can set a custom port by using an environment variable, `ARC_TABLES_PORT=5555`
 
 ### File Watching and Dependency Hydration
 While Sandbox is running, it will watch:
@@ -92,7 +92,7 @@ Invokes `callback` once the DB is up and listening.
 
 ### `sandbox.events.start(callback)`
 
-If Architect project manifest defines [`@queues`][queues] or [`@events`][events], sets up interprocess communication between your events and queues via a tiny web server.
+If Architect project manifest defines [`@queues`][queues] or [`@events`][events], sets up inter-process communication between your events and queues via a tiny web server.
 
 Returns an object with a `close([callback])` method that gracefully shuts the server down.
 
@@ -100,7 +100,7 @@ Invokes `callback` once the server is up and listening.
 
 ### `sandbox.http.start(callback)`
 
-If Architect project manifest defines defines [`@http`][http] or [`@websocket`][websocket] routes, starts the necessary servers and sets up routes as defined in the project manifest.
+If Architect project manifest defines [`@http`][http] or [`@websocket`][WebSocket] routes, starts the necessary servers and sets up routes as defined in the project manifest.
 
 Invokes `callback` once the server is up and listening.
 
@@ -110,7 +110,7 @@ Closes any servers started via [`sandbox.http.start()`][start].
 
 ### `sandbox.start({port, options, quiet}, callback)`
 
-Initializes the sandbox; first checks that ports are available to consume, prints a banner, loading basic environment variables and necessary AWS credentials, and sets up any local DBs via [`sandbox.db.start()`][db], events or queues via [`sandbox.events.start()`][events-start], HTTP handlers via [`sandbox.http.start()`][http-start].
+Initializes the sandbox; first checks that ports are available to consume, prints a banner, loading basic environment variables and necessary AWS credentials, and sets up any local databases via [`sandbox.db.start()`][db], events or queues via [`sandbox.events.start()`][events-start], HTTP handlers via [`sandbox.http.start()`][http-start].
 
 Invokes `callback` once everything is ready, passing `null` as the first parameter and `sandbox.end` as the second parameter.
 

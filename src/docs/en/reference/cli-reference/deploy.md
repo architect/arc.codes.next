@@ -46,13 +46,23 @@ If the local `.arc` file has defined (and created) `@static` buckets, then the c
 - `arc deploy dirty` overwrites static lambda with local source (fast!)
 - `arc deploy production` deploys to a production stack
 - `arc deploy static` deploys static assets only
+- `arc deploy --dry-run` creates a CloudFormation template but does not deploy it
 
 Additional considerations:
 
-- If `package.json`, `requirements.txt` or `Gemfile` are found deps will be installed
+- If `package.json`, `requirements.txt` or `Gemfile` are found, dependencies will be installed
 - Copies `src/shared` and `src/views`
 
 ## Flags
+
+[dirty, --dirty, -d]
+[--dry-run ]
+[production, --production, -p]
+[prune, --prune]
+[static, --static, -s]
+[verbose, --verbose, -v]
+[tags, --tags, -t]
+[name, --name, -n]
 
 ADD ME!
 

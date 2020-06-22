@@ -72,5 +72,8 @@ Copies shared code (from `src/shared` and `src/views`) into all Functions.
 
 ## Flags
 
-ADD ME!
+`[-s, --shared, shared]` - hydrates and copies shared files only
+`[-u, --update, update]` - updates each function's dependencies
+`[-v, --verbose, verbose]` - prints additional output to the console
+
 

@@ -9,7 +9,7 @@ sections:
 
 ## Overview
 
-Architect  comes with helpful terminal access to your data in the form of a `repl` feature that lets you perform methods on DynamoDB such as:
+Architect comes with helpful terminal access to your data in the form of a `repl` feature that lets you perform methods on DynamoDB such as:
 
 - read
 - evaluate
@@ -25,8 +25,4 @@ Architect  comes with helpful terminal access to your data in the form of a `rep
 - `arc repl production` connects to production tables and indexes
 
 After the REPL starts type: `data` to see the generated data layer.
-
-## Flags
-
-ADD ME!
 

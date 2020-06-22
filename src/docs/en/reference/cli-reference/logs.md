@@ -30,5 +30,7 @@ let logs = require('@architect/logs')
 
 ## Flags
 
-ADD ME!
+`[-v, --verbose, verbose]`
+`[-n, --nuke, nuke]`
+`[-p, --production, production, prod]`
 

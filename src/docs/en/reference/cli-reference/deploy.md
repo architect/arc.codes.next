@@ -1,6 +1,6 @@
 ---
 title: deploy
-description: 160 (or fewer) character description of this document!
+description: Architect deploy is a module to deploy SAM and CloudFormation templates to an AWS account
 sections:
   - Overview
   - Usage
@@ -13,7 +13,7 @@ sections:
 
 This module also deploys code found in `/src` to `staging`. If `ARC_DEPLOY=production` is set, the code in `/src` will be deployed to `production`. (A lot of other things happen under the hood, outlined below.)
 
-If the local `.arc` file has defined (and created) `@static` buckets, then the contents of `.static` are deployed to the appropriate S3 bucket. 
+If the local `.arc` file has defined (and created) `@static` folders, they are deployed to the an S3 bucket. 
 
 **To deploy your project to AWS, you'll need:**
 
@@ -32,15 +32,11 @@ If the local `.arc` file has defined (and created) `@static` buckets, then the c
 1.) Checks for valid `package.json` & `package-lock.json` files in each function
 2.) Removes each function's local `node_modules` folder and does a fresh install of all modules
 3.) Populates each function with [`arc` shared code](/guides/sharing-common-code) via `/src/shared`
-4.) Compresses and uploads each function directory to its corresponding Lambda
+4.) Compresses and uploads each function directory to its corresponding Lambda function
 
 > Reminder: All `arc` NPM scripts require `profile` and `region` variables set, either as  environment variables or in `@aws` within your `.arc` manifest. Learn more in the [Prerequisites guide](/quickstart).
 
-<script src="https://asciinema.org/a/181947.js" id="asciicast-181947" async data-autoplay="true" data-size="big"></script>
-
 ## Usage
-
-### Deploy code to staging
 
 - `arc deploy` deploys to a staging stack
 - `arc deploy dirty` overwrites static lambda with local source (fast!)
@@ -55,14 +51,19 @@ Additional considerations:
 
 ## Flags
 
-[dirty, --dirty, -d]
-[--dry-run ]
-[production, --production, -p]
-[prune, --prune]
-[static, --static, -s]
-[verbose, --verbose, -v]
-[tags, --tags, -t]
-[name, --name, -n]
-
-ADD ME!
-
+`[dirty, --dirty, -d]`
+Overwrites a lambda with the local source. This should only be considered a temporary deployment because the next full deploy will update all functions. This is a faster way to deploy and test small changes to individual functions, without redeploying everything in the stack. Dirty deploys only go to staging.
+`[--dry-run ]`
+Creates a CloudFormation template, but does not deploy it. A dry-run allows you to check the CloudFormation and SAM output before deploying the actual stack.
+`[production, --production, -p]`
+Deploys a CloudFormation stack to the production environment, with it's resources separate from staging.
+`[prune, --prune]`
+Removes static assets not present in the local static folders
+`[static, --static, -s]`
+Deploys only the files in the static folder
+`[verbose, --verbose, -v]`
+Displays the full deploy status messages
+`[tags, --tags, -t]`
+Adds resource tags to the CloudFormation stack
+`[name, --name, -n]`
+Adds custom name to CloudFormation stack

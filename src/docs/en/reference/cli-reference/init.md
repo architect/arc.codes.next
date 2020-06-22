@@ -1,6 +1,6 @@
 ---
 title: init
-description: 160 (or fewer) character description of this document!
+description: Bootstrapping a new Architect project with folder structures and .arc file
 sections:
   - Overview
   - Usage
@@ -8,6 +8,8 @@ sections:
 ---
 
 ## Overview
+
+The `init` command will bootstrap new Architect projects and local folders. It uses the `@architect/create` module.
 
 ## Usage
 
@@ -17,5 +19,6 @@ Edit the `.arc` file to add functions and re-run `arc init` to generate local co
 
 ## Flags
 
-ADD ME!
-
+`[-s, --static, static]` - creates a new project with `@static` folder set to `public`
+`[-r, --runtime, runtime ]` - create a new project with a specified runtime, options are node, deno, python, or ruby
+`[-v, --verbose, verbose]` - outputs extra message during creation

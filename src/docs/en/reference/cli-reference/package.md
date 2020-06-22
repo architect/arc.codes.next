@@ -1,6 +1,6 @@
 ---
 title: package
-description: 160 (or fewer) character description of this document!
+description: Architect package is a module to parse a .arc file and packages it into a CloudFormation template
 sections:
   - Overview
   - Usage
@@ -38,8 +38,4 @@ let arc = parse(arcString)
 let sam = pkg(arc)
 console.log(sam)
 ```
-
-## Flags
-
-ADD ME!
 

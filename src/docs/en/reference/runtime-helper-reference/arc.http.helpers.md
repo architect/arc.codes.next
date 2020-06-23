@@ -9,7 +9,9 @@ sections:
 ## Body parser
 
 ADD ME!
-
+```js
+let req = arc.http.helpers.bodyParser(request)
+```
 
 ## URL
 

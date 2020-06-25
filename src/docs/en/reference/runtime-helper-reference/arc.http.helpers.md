@@ -8,7 +8,8 @@ sections:
 
 ## Body parser
 
-ADD ME!
+`arc.http.helpers.bodyParser` accepts a request object and will interpolate a base64 encoded string into an object that you can work with. 
+
 ```js
 let req = arc.http.helpers.bodyParser(request)
 ```

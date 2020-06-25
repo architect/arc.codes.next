@@ -45,12 +45,12 @@ exports.handler = arc.http(route)
 `res` is a function that accepts named parameters: 
 
 *Required*: One of 
-- json
+- JSON
 - html 
 - text
 - css
 - js
-- xml
+- XML
 - location
 Optionally: `session` to assign to the current session
 Optionally: `status` or `code` of: 

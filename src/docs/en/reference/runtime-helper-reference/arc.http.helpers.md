@@ -8,7 +8,7 @@ sections:
 
 ## Body parser
 
-`arc.http.helpers.bodyParser` accepts a  base64 encoded string request body and will interpolate a request body into an object. `bodyParser` will interpolate request bodies based on `Content-Type` from the headers. Architect request bodies are always base64 encoded strings with `req.isBase64Encoded=true`.
+`arc.http.helpers.bodyParser` accepts a Base64 encoded string request body and will interpolate a request body into an object. `bodyParser` will interpolate request bodies based on `Content-Type` from the headers. Architect request bodies are always Base64 encoded strings with `req.isBase64Encoded=true`.
 
 ```js
 let arc = require('@architect/functions')
@@ -22,7 +22,7 @@ exports.handler = async function (req) {
 }
 ```
 
-multipart/form-data
+Multipart Form Data
 ```js
 // incoming POST request with {"key":"value"}
 {
@@ -38,7 +38,7 @@ multipart/form-data
 }
 ```
 
-application/x-wwww-form-urlencoded
+Form data URL encoded
 ```js
 // incoming POST request with {"key":"value"}
 {
@@ -52,7 +52,7 @@ application/x-wwww-form-urlencoded
 [Object: null prototype] { key: 'value' }
 ```
 
-application/json
+JSON
 ```js
 // incoming POST request with {"key":"value"}
 {

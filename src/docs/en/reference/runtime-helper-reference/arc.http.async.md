@@ -3,7 +3,6 @@ title: arc.http.async
 description: 160 (or fewer) character description of this document!
 sections:
   - Overview
-  - Getting started
   - Requests
   - Responses
   - Middleware
@@ -11,13 +10,23 @@ sections:
 
 ## Overview
 
-`arc.http.async` is a middleware style helper that accepts multiple `async` functions and executes them in order. Each execution returns a Lambda function compatible signature to modify the `request` object. 
+`arc.http.async` is a middleware style helper that accepts multiple `async` functions and executes them in order. Each execution returns a Lambda function compatible signature to modify the `request` object. To use it `npm install @architect/functions` to each function folder and require it at the top. This allows you to combine multiple `async/await` operations in a single HTTP function.
 
+```js
+let arc = require('@architect/functions')
 
-## Getting started
+async function first(request) {
+  //modify the request object
+  return request
+}
 
-ADD ME!
+async function second(request) {
+  // use modified request from first()
+  return response
+}
 
+exports.handler = arc.http.async(first, second)
+```
 
 ## Requests
 
@@ -39,7 +48,7 @@ Requests are run through each middleware function in the order they are passed t
 
 ## Responses
 
-res` is a function that accepts named parameters: 
+`res` is a function that accepts named parameters: 
 
 *Required*: One of 
 - JSON

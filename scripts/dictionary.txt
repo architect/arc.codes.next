@@ -189,6 +189,7 @@ PowerShell
 pragma
 pragmas
 Pragmas
+prepends
 pre-configured
 pre-compiled
 pre-installed
@@ -259,6 +260,7 @@ tsx
 TSX
 TTL
 UI
+URI
 unauthenticated
 unformatted
 Unordered

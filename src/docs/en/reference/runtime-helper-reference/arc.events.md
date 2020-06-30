@@ -41,6 +41,9 @@ await arc.events.publish({
 
 Architect also has a helper method for subscribing a function to an event. If no callback is provided, it will return a promise.  
 
+Used to define a lambda function that will act as an event handler. Event handlers are defined in your application's Architect project manifest file under the @events pragma. The function code for the accompanying handler to each event should use arc.events.subscribe to wrap the handler.
+
+
 ```js
 // src/events/verify-email
 // example subscribe method

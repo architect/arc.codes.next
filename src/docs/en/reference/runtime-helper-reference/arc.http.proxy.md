@@ -11,7 +11,7 @@ sections:
 
 ## Overview
 
-`arc.http.proxy` is the primary interface for reading static assets out of S3
+`arc.http.proxy` is the primary interface for reading static assets out of S3. 
 
 
 ## Bucket

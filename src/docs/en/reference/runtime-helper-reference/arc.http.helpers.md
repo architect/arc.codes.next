@@ -4,6 +4,7 @@ description: 160 (or fewer) character description of this document!
 sections:
   - Body parser
   - URL
+  - Express
 ---
 
 ## Body parser
@@ -83,3 +84,24 @@ exports.handler = async function (req) {
 ```
 In a staging environment, it will send the user to `/staging/about`, but in testing and production it will be `/about`
 
+## Express
+
+Architect has a helper for transitioning your Express apps to fully serverless architecture. In order to use Express in an HTTP function, look at the following example: 
+
+```js
+// src/http/get-index/index.js
+let arc = require('@architect/functions')
+let express = require('express')
+
+let app = express()
+
+app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/cool', (req, res)=> res.send('very cool'))
+
+exports.handler = arc.http.express(app)
+```
+`arc.http.express` is passed an app instance of `express()` and the rest of the app works just like Express. 
+
+Things to keep in mind: 
+- A Lambda function is stateless, so each time a user reaches this endpoint, they will receive a new instance of the entire Express server.
+- Bundling an entire app with a web server in a Lambda function will result in poor performance if the entire function’s payload (including dependencies) exceeds 5MB.

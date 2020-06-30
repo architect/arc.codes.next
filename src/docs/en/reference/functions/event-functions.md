@@ -156,18 +156,6 @@ arc.events.publish({
 }, console.log)
 ```
 
-You can also invoke Lambdas across `@app` namespaces:
-
-```javascript
-var arc = require('@achitect/functions')
-
-arc.events.publish({
-  app: 'some-other-app',
-  name: 'hit-counter',
-  payload: {hits: 2},
-}, console.log)
-```
-
 ### Subscribe functions to events
 
 An example of a `hit-counter` event handler:

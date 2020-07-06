@@ -61,6 +61,7 @@ codebase
 Codeship
 coldstart
 composable
+connectionId
 config
 Config
 configs
@@ -95,6 +96,7 @@ DNS-based
 DNSimple
 DocumentClient
 DocumentDB
+DOM
 DS_Store
 Dyn
 dynalite
@@ -277,6 +279,8 @@ Webpack
 WebSocket
 WebSockets
 WebSocket-enabled
+ws
+WSS
 Whitespace
 XSS
 YAML

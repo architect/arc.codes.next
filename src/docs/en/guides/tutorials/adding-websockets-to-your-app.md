@@ -1,6 +1,6 @@
 ---
 title: Adding WebSockets to your app
-description: 160 (or fewer) character description of this document!
+description: Add real-time connections between clients with serverless functions.
 sections:
   - Overview
   - Connecting to your WebSocket
@@ -9,7 +9,7 @@ sections:
 
 ## Overview
 
-ADD ME!
+The `@ws` primitive creates a WebSocket endpoint and stateless handler functions: `connect`, `disconnect` and `default`.
 
 
 ## Connecting to your WebSocket

@@ -9,6 +9,8 @@
 `build`ing
 ACM
 Alexa
+application/x-www-form-urlencoded
+application/json
 APIs
 arc-example-cors
 arc-repos
@@ -187,6 +189,7 @@ PowerShell
 pragma
 pragmas
 Pragmas
+prepends
 pre-configured
 pre-compiled
 pre-installed
@@ -257,11 +260,13 @@ tsx
 TSX
 TTL
 UI
+URI
 unauthenticated
 unformatted
 Unordered
 unparsed
 unthrottled
+urlencoded
 v5
 vars
 vimrc

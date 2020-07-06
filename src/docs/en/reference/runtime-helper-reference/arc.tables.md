@@ -16,50 +16,78 @@ sections:
 
 ## Overview
 
-ADD ME!
+`arc.tables(callback)`
+Returns an object that can be used to access data in database tables as defined under `@tables` in your `.arc` file. For example, given the following .arc file snippet:
+```
+@tables
+accounts
+  accountID *String
+
+messages
+  msgID *String
+```
+Running the following code:
+
+```js
+let data = await arc.tables()
+```
+Would yield the following objects: 
+- `data.accounts`: reference to the `accounts` table
+- `data.messages`: reference to the `messages` table
+
+... which contain the following methods:
 
 
 ## get
 
-ADD ME!
+`get(key, callback)`: retrieves the record from the table with `key` key and invokes callback when complete
 
+```js
+let result = await data.accounts.get({
+  accountID: 'fake'
+})
+// returns {"accountID: "fake"}
+```
 
 ## query
 
-ADD ME!
+`query(params, callback)`: queries the table using params and invokes callback with the result
+
+```js
+let result = await data.accounts.query({
+  KeyConditionExpression: 'accountID = :id',
+  ExpressionAttributeValues: {
+    ':id': 'one',
+  }
+})
+```
+
+## scan - `scan(params, callback)`
+
+scans the table using params and invokes callback with the result
 
 
-## scan
+## put - `put(item, callback)`
 
-ADD ME!
-
-
-## put
-
-ADD ME!
+adds item to the table and invokes callback with the item when complete
 
 
-## delete
+## delete - `delete(key, callback)`
 
-ADD ME!
-
-
-## update
-
-ADD ME!
+deletes the record from the table with `key` key and invokes callback with the result
 
 
-## data._db
+## update - `update(params, callback)`
 
-ADD ME!
-
-
-## data._doc
-
-ADD ME!
+updates an item in the table using params and invokes callback when complete
 
 
-## data._name
+## `data._db`
+an instance of `DynamoDB` from the `aws-sdk`
 
-ADD ME!
+## `data._doc`
+an instance of `DynamoDB.DocumentClient` from the `aws-sdk`
+
+## `data._name`
+a helper for returning an environment appropriate table name
 

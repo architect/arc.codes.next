@@ -68,14 +68,17 @@ Now we can write our `get-index` handler. This function handler sends an HTML fo
   }
 ```
 
-Next we're going to create a new event function in `/src/events/yolo/`. This function is automatically subscribed to the topic created from the `.arc` namespace and will receive a JSON payload published to the event namespace.
+Next we're going to create a new event function in `/src/events/yolo/`. This function is automatically subscribed to the topic created from the `.arc` file and will receive a JSON payload published to the event name.
 ```javascript
 // src/events/yolo/index.js
+let arc = require('@architect/functions')
 
-exports.handler = async function (event) {
+async function yoloEvent(event) {
   console.log('got event', JSON.stringify(event, null, 2))
   return true
 }
+
+exports.handler = arc.events.subscribe(yoloEvent)
 ```
 
 The final step is creating a POST endpoint for the client to send JSON data. Good thing we can make another Lambda function, and the `@architect/functions` library will handle publishing and service discovery of the SNS topic. Since each function is separated in it's execution, we will have to install it locally and declare a `package.json` in the function folder. 

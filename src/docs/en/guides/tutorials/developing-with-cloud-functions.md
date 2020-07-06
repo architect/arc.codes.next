@@ -140,8 +140,7 @@ let data = require('@architect/data')
 ```
 
 In the example below we'll use some of the helpers from  `@architect/functions`:
- 
-- [`arc.middleware`](/en/reference/runtime-helper-reference) - middleware API, allowing requests to be filtered through multiple steps before sending a response.
+
 - [`arc.http.session`](/en/reference/arc.http.helpers) - read the session using the request cookie, write the session returning a cookie string
 - [`arc.http.helpers.url`](/guides/urls) - transform `/` into the appropriate `staging` and `production` API Gateway paths
 - [`arc.http.helpers.static`](/guides/static-assets) - accepts a path part and returns path to `localhost:3333` or `staging` and `production` S3 buckets

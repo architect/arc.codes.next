@@ -11,7 +11,7 @@ sections:
 
 The `@ws` primitive creates a WebSocket endpoint and stateless handler functions: `connect`, `disconnect` and `default`.
 
-TThings to know about serverless WebSockets and API Gateway:
+Things to know about serverless WebSockets and API Gateway:
  - $connect/$disconnect route must return HTTP Status 200 to signal an upgrade from `HTTP` to `WSS`. The moment the $connect handler returns 200, you can't do anything else in that function.
  - $default catches everything else. I didn't try custom WebSocket route handlers yet, instead I check for a payload attribute and create responses inside the $default handler.
  - In order to persist the client connections and state of each connection, I write that information into DynamoDB. Then all changes are recorded and rebroadcast to the client.

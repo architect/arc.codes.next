@@ -74,7 +74,7 @@ adds item to the table and invokes callback with the item when complete
 
 ## delete - `delete(key, callback)`
 
-deletes the record from the table with key key and invokes callback with the result
+deletes the record from the table with `key` key and invokes callback with the result
 
 
 ## update - `update(params, callback)`

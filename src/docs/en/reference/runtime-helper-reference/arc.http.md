@@ -72,7 +72,7 @@ The default HTTP status code is 200. A 302 is sent automatically when redirectin
 
 ## Middleware
 
-`arc.http` can accept multiple functions and execute them in the order they are passed. If the function does not end the request/response cycle, you must call `next()` to proceed to the next function, similar to Express style middleware. 
+`arc.http` can accept multiple functions and execute them in the order they are passed. If the function does not end the request/response cycle, you must call `next()` to proceed to the next function, similar to Express style middleware. The final function call must end with a valid response object. 
 
 In the following example we define `validate` middleware function. When this Lambda function is invoked, it will execute `validate()` then continue onto `handler()` and return the response to the client. 
 ```js

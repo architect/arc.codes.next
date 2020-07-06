@@ -35,7 +35,7 @@ sections:
 Architect supports the following runtime versions when working locally:
 
 **Recommended**
-- Node: `10.x` & `8.10` using `npm`
+- Node: `12.x` & `10.x` using `npm`
 - Ruby: `2.5` using `bundle`
 - Python: `3.7` & `3.6` using `pip3`
 

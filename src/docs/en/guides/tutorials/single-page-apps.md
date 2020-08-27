@@ -50,6 +50,7 @@ Lambda is _very good_ at reading and processing text from S3. To enable the prox
 
 ```javascript
 // src/http/get-index/index.js
+
 let arc = require('@architect/functions')
 
 exports.handler = arc.proxy.public()
@@ -61,6 +62,7 @@ The `arc.proxy.public` function accepts an optional configuration param `spa` wh
 
 ```javascript
 // src/http/get-index/index.js
+
 let arc = require('@architect/functions')
 
 exports.handler = arc.proxy.public({spa:true})
@@ -78,6 +80,7 @@ The `arc.proxy.public` accepts an `alias` configuration object for mapping prett
 
 ```javascript
 // src/http/get-index/index.js
+
 let arc = require('@architect/functions')
 
 exports.handler = arc.proxy.public({
@@ -97,6 +100,7 @@ This demonstrates using proxy plugins to transform all links so they are prefixe
 
 ```javascript
 // src/http/get-index/index.js
+
 let arc = require('@architect/functions')
 
 exports.handler = arc.proxy.public({
@@ -120,30 +124,26 @@ While not necessary until DNS is set up it's super helpful. Transform plugins op
 
 Architect supports the following transform plugins:
 
-*prototyping*
+- **prototyping**
+  - `@architect/proxy-plugin-html-urls` adds `/staging` or `/production` to HTML elements
+  - `@architect/proxy-plugin-css-urls` adds `/staging` or `/production` to CSS `@imports` statements
+  - `@architect/proxy-plugin-mjs-urls` adds `/staging` or `/production` to JS module `import` statements
 
-- `@architect/proxy-plugin-html-urls` adds `/staging` or `/production` to HTML elements
-- `@architect/proxy-plugin-css-urls` adds `/staging` or `/production` to CSS `@imports` statements
-- `@architect/proxy-plugin-mjs-urls` adds `/staging` or `/production` to JS module `import` statements
+- **esmodules**
+  - `@architect/proxy-plugin-bare-imports` map bare imports to fully qualified URLs
 
-*esmodules*
+- **syntax transpilers**
+  - `@architect/proxy-plugin-jsx/react` transpile JSX into `React` calls
+  - `@architect/proxy-plugin-jsx/preact` transpile JSX into `h` calls
+  - `@architect/proxy-plugin-tsx/react` transpile TSX into `React` calls
+  - `@architect/proxy-plugin-tsx/preact` transpile TSX into `h` calls
+  - `@architect/proxy-plugin-md` transpile Markdown into HTML
+  - `@architect/proxy-plugin-sass` transpile SCSS into CSS
 
-- `@architect/proxy-plugin-bare-imports` map bare imports to fully qualified URLs
-
-*syntax transpilers*
-
-- `@architect/proxy-plugin-jsx/react` transpile JSX into `React` calls
-- `@architect/proxy-plugin-jsx/preact` transpile JSX into `h` calls
-- `@architect/proxy-plugin-tsx/react` transpile TSX into `React` calls
-- `@architect/proxy-plugin-tsx/preact` transpile TSX into `h` calls
-- `@architect/proxy-plugin-md` transpile Markdown into HTML
-- `@architect/proxy-plugin-sass` transpile SCSS into CSS
-
-*release*
-
-- `@architect/proxy-plugin-html-min` minify HTML
-- `@architect/proxy-plugin-css-min` minify CSS 
-- `@architect/proxy-plugin-mjs-min` minify JS
+- **release**
+  - `@architect/proxy-plugin-html-min` minify HTML
+  - `@architect/proxy-plugin-css-min` minify CSS 
+  - `@architect/proxy-plugin-mjs-min` minify JS
 
 ## Serverless Site Rendering
 
@@ -151,6 +151,7 @@ Prerendering content is great for performance but sometimes you need complete co
 
 ```javascript
 // src/http/get-index/index.js
+
 let arc = require('@architect/functions')
 let myRenderFun = require('@architect/views/my-render-fun')
 
@@ -169,6 +170,7 @@ Or reference a local module:
 
 ```javascript
 // src/http/get-index/index.js
+
 let arc = require('@architect/functions')
 
 exports.handler = arc.proxy.public({
@@ -193,7 +195,7 @@ There are many ways to build a single-page application. Larger applications can 
 
 In this guide, we'll be using the frontend library <a href=https://reactjs.org/ target=blank>React</a> with the <a href=https://parceljs.org/recipes.html target=blank>Parcel bundler</a>. React is probably the most popular framework and works with many bundlers, but we like Parcel because of its speed and simplicity.
 
-1. Create a fresh Architect project
+1.) Create a fresh Architect project
 
 Initialize an Architect project, change directories into the project folder, create a `package.json` file, and install NPM packages:
 
@@ -204,7 +206,7 @@ npm init -f
 npm install react react-dom parcel-bundler @architect/sandbox
 ```
 
-2. Update the build folder configuration in `app.arc`
+2.) Update the build folder configuration in `app.arc`
 
 Edit the `app.arc` file in the root of your project directory so it shows the following:
 
@@ -216,7 +218,7 @@ my-spa
 folder dist
 ```
 
-3. Update the build script
+3.) Update the build script
 
 Add the following start script to your `package.json` file:
 
@@ -226,7 +228,7 @@ Add the following start script to your `package.json` file:
 }
 ```
 
-4. Update `public/index.html`
+4.) Update `public/index.html`
 
 Replace the contents of your `index.html` file with the following:
 
@@ -240,7 +242,7 @@ Replace the contents of your `index.html` file with the following:
 </html>
 ```
 
-5. Add `public/index.js`
+5.) Add `public/index.js`
 
 Create an `index.js` file and add the following to it:
 
@@ -258,7 +260,7 @@ var mountNode = document.getElementById("app");
 ReactDOM.render(<HelloMessage name="Jane" />, mountNode);
 ```
 
-6. Preview your app by starting the dev server
+6.) Preview your app by starting the dev server
 
 ```bash
 npm start

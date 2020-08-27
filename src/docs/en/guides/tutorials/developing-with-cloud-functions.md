@@ -49,17 +49,20 @@ Cloud function apps embody the dream we've been promised of the cloud for decade
 ## Principles & best practices
 
 ### Statelessness between invocations
+
 Unlike servers, which can take seconds or minutes to spin up, cloud functions start in milliseconds, and can instantly fan out to massive scale.
 - This is possible because cloud functions are effectively stateless between each invocation
 - However, many of today's applications assume some statefulness between executions, so this may be a new consideration for your application architecture
 
 ### Statelessness can impact your choice of database
+
 Because cloud functions are effectively stateless, older socket-based data persistence systems (example: most SQL databases) can become overwhelmed by their need to open and close connections so frequently.
 - For this reason, cloud functions work best with persistence systems that utilize fast, non-socket-based methods of transaction (e.g. HTTP, API, etc.)
 - Examples include Architect Data / DynamoDB, Firebase, RethinkDB, FaunaDB, GraphQL, etc.
 - This is, of course, evolving! We understand there projects launching soon to enable cloud function-friendly accessing of socket-based databases like SQL, Postgres, MongoDB, etc.
 
 ### Smaller cloud functions run faster
+
 Cloud functions start and run fastest when they're small and discrete.
 - For this reason Architect applications split your application up into individual, stateless functions, each its own directory in your repo
 - Of course, intra-project code sharing would be a requirement to keep things dry, so Architect applications share code via `src/shared/` and `src/views/` directories ([learn more here](/en/guides/tutorials/code-sharing-across-functions))
@@ -100,6 +103,7 @@ Code sharing across your project's functions is implemented using `src/shared` d
 
 ```javascript
 // src/shared/layout.js
+
 module.exports = function layout(html) {
   return `
     <!doctype html>
@@ -135,6 +139,7 @@ HTTP functions come with `@architect/functions` and `@architect/data` installed.
 
 ```javascript
 // opt into architect functions and data conveniences
+
 let arc = require('@architect/functions')
 let data = require('@architect/data')
 ```
@@ -195,6 +200,7 @@ exports.handler = async function http(request) {
 
 ```javascript
 // Route handles 404s
+
 const notFound = async function http(request) {
   if (request.path !== "/") {
     return {
@@ -231,6 +237,7 @@ A redirect writing to the `session`:
 
 ```javascript
 // src/http/post-login/index.js
+
 let arc = require('@architect/functions')
 
 exports.handler = async function http(req) {
@@ -250,6 +257,7 @@ A `302` response clearing the requester's session data:
 
 ```javascript
 // src/http/get-logout/index.js
+
 let arc = require('@architect/functions')
 
 exports.handler = async function http(req) {
@@ -266,6 +274,7 @@ exports.handler = async function http(req) {
 
 ```javascript
 // src/http/get-some-broken-page/index.js
+
 exports.handler = async function http(req) {
   return {
     type: 'text/html',
@@ -279,6 +288,7 @@ exports.handler = async function http(req) {
 
 ```javascript
 // src/http/get-cats/index.js
+
 exports.handler = async function http(req) {
   return {
     type: 'application/json',
@@ -436,4 +446,4 @@ exports.handler = async function route(request) {
 
 ```
 
-And that's it! Remember you can find [the example repo on GitHub.](https://github.com/architect/arc-example-login-flow)
+And that's it! Remember you can find [the oauth guide here](https://learn.begin.com/basic/state/oauth)

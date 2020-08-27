@@ -15,6 +15,7 @@ Developers that prefer JSON or YAML can opt into using either syntax in arc.json
 
 ```bash
 # This is going to be great!
+
 @app
 testapp
 

@@ -17,8 +17,8 @@ This section is about setting up your local development environment and a testin
 
 Architect targets two use cases:
 
-1. **Previewing** - code runs locally and can be opened in a web browser
-2. **Testing** - code runs headlessly in a terminal
+1.) **Previewing** - code runs locally and can be opened in a web browser
+2.) **Testing** - code runs headlessly in a terminal
 
 Follow the [quickstart](/en/guides/get-started/quickstart) to get everything wired up. `npx sandbox` kicks up a local web server and creates tables and indexes defined in your `app.arc` file for previewing work. 
 
@@ -81,6 +81,7 @@ Scaffold your two test files with an environment check; this a good practice to 
 
 ```javascript
 // tests/http-test.js
+
 let test = require('tape')
 let arc = require('@architect/architect')
 
@@ -92,6 +93,7 @@ test('env', t=> {
 
 ```javascript
 // tests/db-test.js
+
 let test = require('tape')
 let arc = require('@architect/architect')
 
@@ -107,10 +109,13 @@ Check the tests by running `npm t`. (It's ok if things fail &mdash; that's exact
 
 ## HTTP testing
 
-In order to test HTTP routes we will need an HTTP client. Lets use [tiny-json-http](https://github.com/brianleroux/tiny-json-http), a small, dependency free module with a straightforward interface. Install by running `npm i tiny-json-http --save-dev` and edit the HTTP test:
+In order to test HTTP routes we will need an HTTP client. Lets use [tiny-json-http](https://github.com/brianleroux/tiny-json-http), a small, dependency free module with a straightforward interface. 
+
+Install by running `npm i tiny-json-http --save-dev` and edit the HTTP test:
 
 ```javascript
 // tests/http-test.js
+
 let test = require('tape')
 let tiny = require('tiny-json-http')
 let arc = require('@architect/architect')
@@ -120,9 +125,8 @@ test('env', t=> {
   t.ok(arc.sandbox.http, 'arc.sandbox.http exists in current scope')
 })
 
-/**
- * first we need to start the local http server
- */
+// First we need to start the local http server
+ 
 let close
 test('arc.sandbox.start', async t=> {
   t.plan(1)
@@ -130,9 +134,8 @@ test('arc.sandbox.start', async t=> {
   t.ok(true, 'http server started on http://localhost:3333')
 })
 
-/**
- * then we can make a request to it and check the result
- */
+// Then we can make a request to it and check the result
+
 test('get /', async t=> {
   t.plan(1)
   let url = 'http://localhost:3333'
@@ -140,9 +143,8 @@ test('get /', async t=> {
   t.ok(result.body, 'got 200 response')
 })
 
-/** 
- * finally close the server so we cleanly exit the test
- */
+// Finally close the server so we cleanly exit the test
+
 test('server.close', t=> {
   t.plan(1)
   close()
@@ -160,6 +162,7 @@ In an `app.arc` defined project `NODE_ENV` is used for knowing where the code is
 
 ```javascript
 // tests/db-test.js
+
 let AWS = require('aws-sdk')
 let endpoint = new AWS.Endpoint('http://localhost:5000')
 let db = process.env.NODE_ENV === 'testing'? new AWS.DynamoDB({endpoint}) : new AWS.DynamoDB
@@ -167,18 +170,16 @@ let db = process.env.NODE_ENV === 'testing'? new AWS.DynamoDB({endpoint}) : new 
 let test = require('tape')
 let arc = require('@architect/architect')
 
-/**
- * first we need to start the local db server and grab a reference to the client
- */
+// First we need to start the local db server and grab a reference to the client
+
 let client 
 test('arc.sandbox.db.start', t=>{
   t.plan(1)
   client = arc.sandbox.db.start(xxx=> t.ok(true, 'started'))
 })
 
-/**
- * then we can work with the db using the vanilla `DynamoDB` client (or `DynamoDB.DocumentClient`)
- */
+//  Then we can work with the db using the vanilla `DynamoDB` client (or `DynamoDB.DocumentClient`)
+
 test('db', t=> {
   t.plan(1)
   // note: we do not need to create the tables the
@@ -190,12 +191,11 @@ test('db', t=> {
   })
 })
 
-/** 
- * finally close the db client so we cleanly exit the test
- */
+// Finally close the db client so we cleanly exit the test
+
 test('arc.sandbox.db.close', t=>{
   t.plan(1)
-  // finally we'll use that client reference from above to close the sandbox
+  // Finally we'll use that client reference from above to close the sandbox
   client.close()
   t.ok(true, 'closed')
 })

@@ -27,7 +27,7 @@ If the local `app.arc` file has defined (and created) `@static` folders, they ar
 
 ## Looking under the hood at `deploy`
 
-`arc`'s deploy process does a number of things during each deploy! In summary:
+Architects deploy process does a number of things during each deploy! In summary:
 
 1.) Checks for valid `package.json` & `package-lock.json` files in each function
 2.) Removes each function's local `node_modules` folder and does a fresh install of all modules

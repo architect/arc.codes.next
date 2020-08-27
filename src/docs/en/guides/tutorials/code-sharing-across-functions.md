@@ -72,6 +72,7 @@ let Answer = require('@architect/shared/helper')
 
 exports.handler = async function http (req) {
   return {
+    statusCode: 200,
     headers: {
       'cache-control': 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0',
       'content-type': 'text/html; charset=utf8'
@@ -94,14 +95,16 @@ exports.handler = async function http (req) {
 ```
 5. Run `npm start` from the command line and take a look at our code structure. Sandbox will hydrate our functions with a `node_modules/@architect/shared` directory which is part of the function's payload when deployed and executed. 
 
-```md
-/
+```bash
+.
 ├── src
-│   └── http
-│       ├── get-index/
-│       ├── get-answer/
-|   └── shared/
-|       ├── helper.js
+│   ├── http
+│   │   ├── get-index/
+│   │   └── get-answer/
+│   │
+│   └── shared/
+│       └── helper.js
+│   
 ├── app.arc
 └── package.json
 ```
@@ -112,9 +115,9 @@ When you navigate to http://localhost:3333/answer you will be greeted with data 
 
 The `src/views` folder is a special location that allows you to include code for each of your HTTP functions with a GET route. Continuing with our `/src/shared` example we will include a layout template that your HTTP functions can use.
 
-1. Modify the `app.arc` file to match the following:
+1.) Modify the `app.arc` file to match the following:
 
-```md
+```bash
 @app
 arc-shared
 
@@ -131,7 +134,7 @@ get /about
 
 What we've done is added two new routes -  `/about` and `/css/:stylesheet`, then declared that two of the routes `/` and `/about` should receive a copy of the modules in `src/views`. 
 
-2. Create a new folder and file, `src/views/layout.js`. In this file we'll write the following contents: 
+2.) Create a new folder and file, `src/views/layout.js`. In this file we'll write the following contents: 
 
 ```javascript
 module.exports = function Layout (props) {
@@ -154,7 +157,7 @@ module.exports = function Layout (props) {
 ```
 This is our shared view template that will be used by each GET route listed under the `@views` pragma in the `app.arc` file. 
 
-4. Next we'll modify `src/http/get-index/index.js` with the following: 
+4.) Next we'll modify `src/http/get-index/index.js` with the following: 
 
 ```javascript
 let Layout = require('@architect/views/layout')
@@ -162,6 +165,7 @@ let Layout = require('@architect/views/layout')
 exports.handler = async function http (request) {
   try {
     return {
+      statusCode: 200,
       headers: {
         'content-type':'text/html; charset=utf8'
       }, 
@@ -192,6 +196,7 @@ let Layout = require('@architect/views/layout')
 exports.handler = async function http (request) {
   try {
     return {
+      statusCode: 200,
       headers: {
         'content-type':'text/html; charset=utf8'
       }, 
@@ -225,6 +230,7 @@ body {
 `
 exports.handler = async function http (request) {
   return {
+    statusCode: 200,
     type: 'text/css; charset=utf8',
     body: styles
   }

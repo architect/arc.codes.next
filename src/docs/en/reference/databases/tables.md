@@ -237,10 +237,11 @@ cats
   stream true
 ```
 
-> `arc init` creates `src/tables/cats` local code and
-> `arc deploy` to publishes to Lambda
+- `arc init` creates `src/tables/cats` local code and
+- `arc deploy` to publishes to Lambda
 
-Node
+**Node**
+
 ```javascript
 exports.handler = async function stream(event) {
   console.log(event)
@@ -248,7 +249,8 @@ exports.handler = async function stream(event) {
 }
 ```
 
-Ruby
+**Ruby**
+
 ```ruby
 def handler(event)
   puts event
@@ -256,7 +258,8 @@ def handler(event)
 end
 ```
 
-Python
+**Python**
+
 ```python
 def handler(event, context):
     print(event)

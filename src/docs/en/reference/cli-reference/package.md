@@ -18,6 +18,7 @@ The AWS Serverless Application Model (AWS SAM) is an open-source framework that 
 Input `arc package` into your terminal to create a sam.json file in the working directory.
 
 ### Example
+
 ```js
 let parse = require('@architect/parser')
 let pkg = require('@architect/package')

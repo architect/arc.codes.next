@@ -46,6 +46,7 @@ An `app.arc` file example:
 
 ```bash
 # this is going to be great!
+
 @app
 hello
 
@@ -54,11 +55,14 @@ fingerprint true
 
 @ws
 action
+connect
+default
+disconnect
 
 @http
 get /
-post /likes
 get /likes
+post /likes
 
 @events
 hit-counter
@@ -79,24 +83,29 @@ likes
 Running `arc init` in the same directory as the `app.arc` file above generates the following function code:
 
 ```
-/
-|-src
-| |-http
-| | |-get-index/
-| | |-get-likes/
-| | '-post-likes/
-| |-events
-| | '-hit-counter/
-| |-scheduled
-| | '-daily-affirmation/
-| |-tables
-| | '-likes/
-| '-ws
-|   |-action/
-|   |-connect/
-|   |-default/
-|   '-disconnect/
-'-app.arc
+.
+├── src
+│   ├── http
+│   │   ├── get-index/index.js
+│   │   ├── get-likes/index.js
+│   │   └── post-likes/index.js
+│   │
+│   ├── events
+│   │   └── hit-counter/
+│   │
+│   ├── scheduled
+│   │   └── daily-affirmation/
+│   │
+│   ├── tables
+│   │   └── likes/
+│   │
+│   └── ws
+│       ├── action/
+│       ├── connect/
+│       ├── default/
+│       └── disconnect/
+│   
+└── app.arc
 ```
 
 The `app.arc` format is terse, easy to read, and quickly learnable to author. The expressions in a `app.arc` file unlock the formerly complex tasks of cloud infrastructure provisioning, deployment, and orchestration.

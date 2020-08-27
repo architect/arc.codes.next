@@ -12,7 +12,7 @@ Cross-origin resource sharing (CORS) is a mechanism that that uses additional HT
 
 ## Example
 
-Let's first create a `app.arc` app with a very simple JSON API endpoint:
+Let's first create an `app.arc` app with a very simple JSON API endpoint:
 
 ```bash
 @app
@@ -28,6 +28,7 @@ The home route loads some basic HTML content:
 
 ```javascript
 // src/http/get-index/index.js
+
 exports.handler = async function http(req) {
   let stage = process.env.NODE_ENV
   return {
@@ -91,6 +92,7 @@ For this example, we'll start with the following client-side source:
 
 ```javascript
 // /js/index.mjs
+
 async function main() {
 
   let res = await fetch(`${location.pathname}/api`)
@@ -106,6 +108,7 @@ The API route `src/http/get-api` is CORS enabled with one flag:
 
 ```javascript
 // src/http/get-api/index.js
+
 exports.handler = async function http(req) {
   return {
     cors: true,
@@ -126,6 +129,7 @@ Continuing from the `/api` endpoint, your API might operate differently based on
 
 ```javascript
 // Example permitted domains
+
 var permittedDomains = [
   'http://localhost:3000',
   'https://example.com'

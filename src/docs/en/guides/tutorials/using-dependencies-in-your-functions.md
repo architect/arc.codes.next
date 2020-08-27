@@ -22,8 +22,10 @@ cd arc-deps-app
 touch app.arc
 ```
 Now we can write a `app.arc` file with two HTTP functions as follows:
-```md
+
+```bash
 # app.arc file
+
 @app
 arc-deps-app
 
@@ -31,6 +33,7 @@ arc-deps-app
 get /deps
 post /echo
 ```
+
 Once you have the `app.arc` file, you can run `arc create` or `arc init` to scaffold the function folders. In each folder we're going to install `@architect/functions`, a runtime helper library. Since each function is isolated, we need to create a `package.json` and `npm install` the module we want.
 
 ```bash
@@ -42,9 +45,12 @@ npm init -y
 npm install @architect/functions
 cd ../../..
 ```
+
 Let's make a couple of small functions to check for `node_modules` and echo JSON from a POST request.
+
 ```js
 // src/http/get-deps
+
 let arc = require("@architect/functions")
 let fs = require("fs")
 let deps = require('./package.json')
@@ -59,8 +65,10 @@ async function checkDeps(request) {
 }
 exports.handler = arc.http.async(checkDeps)
 ```
+
 ```js
 // src/http/post-echo
+
 let arc = require("@architect/functions")
 async function echo(request) {
   let echo = arc.http.helpers.bodyParser(request)

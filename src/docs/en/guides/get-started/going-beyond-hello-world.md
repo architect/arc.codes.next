@@ -64,7 +64,7 @@ Queue functions subscribe a Lambda function to an [SQS Queue](https://aws.amazon
 
 ## Macros
 
-The `@macro` pragma helps you to extend `.arc` with standard [CloudFormation](https://aws.amazon.com/cloudformation/). Macros allow devs to add any resources or modify existing ones extending Architect into the entire AWS ecosystem supported by CloudFormation.
+The `@macro` pragma helps you to extend `app.arc` with standard [CloudFormation](https://aws.amazon.com/cloudformation/). Macros allow devs to add any resources or modify existing ones extending Architect into the entire AWS ecosystem supported by CloudFormation.
 
 > Note: with [Architect Macros](/en/reference/macros) all AWS services supported by CloudFormation can be utilized!
 

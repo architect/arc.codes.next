@@ -20,7 +20,7 @@ Scheduled functions are functions that are invoked at specified times and can be
 
 ## Getting started
 
-To get started with scheduled functions we must first add the `@scheduled` pragma to our `.arc` manifest file. There is a specific syntax for setting the frequency for triggering our scheduled functions.
+To get started with scheduled functions we must first add the `@scheduled` pragma to our `app.arc` manifest file. There is a specific syntax for setting the frequency for triggering our scheduled functions.
 
 ### Syntax
 - Lowercase alphanumeric string
@@ -31,7 +31,7 @@ To get started with scheduled functions we must first add the `@scheduled` pragm
 
 ### Provision
 
-This `.arc` file defines some scheduled functions using both `cron` & `rate`:
+This `app.arc` file defines some scheduled functions using both `cron` & `rate`:
 
 ```bash
 @app
@@ -50,7 +50,7 @@ Which generates the following code:
 │   └── scheduled/
 │       ├── daily-update-buddy/
 │       └── friday-only/
-├── .arc
+├── app.arc
 └── package.json
 ```
 

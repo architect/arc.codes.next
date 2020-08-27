@@ -18,7 +18,7 @@ With a separation of functions on the cloud, better isolation also equals better
 
 ## Developer experience
 
-Architect aims to provide the fastest developer experience for serverless infrastructure. Extend your app with the entire AWS ecosystem of services and tools with just an `.arc` file!
+Architect aims to provide the fastest developer experience for serverless infrastructure. Extend your app with the entire AWS ecosystem of services and tools with just an `app.arc` file!
 
 Another upside is predictable costs and 100% utilization (scale to zero).
 Do less of everything because it's now patching instead of upgrading. You get faster debugging because errors become very shallow in isolation, especially with testing.

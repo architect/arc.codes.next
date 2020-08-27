@@ -8,7 +8,7 @@ sections:
 
 ## Overview
 
-Durable persistence of structured data is the foundation of most applications. `@architect/data` is a very thin wrapper for `DynamoDB` and `DynamoDB.DocumentClient` that reads a `.arc` file and returns a client for creating, modifying, deleting and querying data from DynamoDB!
+Durable persistence of structured data is the foundation of most applications. `@architect/data` is a very thin wrapper for `DynamoDB` and `DynamoDB.DocumentClient` that reads a `app.arc` file and returns a client for creating, modifying, deleting and querying data from DynamoDB!
 
 In this tutorial you will build a simple note taking application, with multiple users, authentication, and data storage with `@architect/data`.
 
@@ -35,10 +35,10 @@ Let's first create a fresh Architect project and change directories into the pro
 ```bash
 mkdir arc-example-notes
 cd arc-example-notes
-touch .arc
+touch app.arc
 ```
 
-Then we'll add the following to our `.arc` file:
+Then we'll add the following to our `app.arc` file:
 
 ```bash
 @app
@@ -291,13 +291,13 @@ module.exports = async function makePerson(email, suppliedPassword) {
 }
 ```
 
-Requiring `@architect/data` reads your app's `.arc` manifest and generates a data access client from it. Working with `.arc` this way means:
+Requiring `@architect/data` reads your app's `app.arc` manifest and generates a data access client from it. Working with `app.arc` this way means:
 
 - You can immediately start working with a database without any configuration
 - No syntax errors due to misspelled string identifiers for table names
 - No configuration code to map table names to execution environments, ensuring staging and production data cannot get mixed up
 
-The following API was generated from the `.arc` file above:
+The following API was generated from the `app.arc` file above:
 
 - `data._db` - an instance of `DynamoDB` from the `aws-sdk`
 - `data._doc` - an instance of `DynamoDB.DocumentClient` from the `aws-sdk`

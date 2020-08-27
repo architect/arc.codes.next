@@ -20,15 +20,15 @@ Architect defines a high level manifest file, in multiple open formats, and view
 
 ## Formats supported
 
-Architect supports a native text file format `.arc` in addition to popular formats: `arc.json`, `arc.yaml` and `arc.toml` when teams prefer those dialects. 
+Architect supports a native text file format `app.arc` in addition to popular formats: `arc.json`, `arc.yaml` and `arc.toml` when teams prefer those dialects. 
 
-The `.arc` format follows a few simple rules:
+The `app.arc` format follows a few simple rules:
 
 - Whitespace is significant 
 - Comments start with `#`
 - Pragmas start with `@` and organize cloud resources and their configuration
 
-`.arc` files define the following pragmas:
+`app.arc` files define the following pragmas:
 
 - `@app` defines the application namespace
 - `@aws` defines AWS specific configuration
@@ -42,7 +42,7 @@ The `.arc` format follows a few simple rules:
 - `@tables` defines DynamoDB database tables and trigger functions for them
 - `@ws` defines API Gateway WebSocket handlers
 
-An `.arc` file example:
+An `app.arc` file example:
 
 ```bash
 # this is going to be great!
@@ -76,7 +76,7 @@ likes
   date *String
 ```
 
-Running `arc init` in the same directory as the `.arc` file above generates the following function code:
+Running `arc init` in the same directory as the `app.arc` file above generates the following function code:
 
 ```
 /
@@ -96,7 +96,7 @@ Running `arc init` in the same directory as the `.arc` file above generates the 
 |   |-connect/
 |   |-default/
 |   '-disconnect/
-'-.arc
+'-app.arc
 ```
 
-The `.arc` format is terse, easy to read, and quickly learnable to author. The expressions in a `.arc` file unlock the formerly complex tasks of cloud infrastructure provisioning, deployment, and orchestration.
+The `app.arc` format is terse, easy to read, and quickly learnable to author. The expressions in a `app.arc` file unlock the formerly complex tasks of cloud infrastructure provisioning, deployment, and orchestration.

@@ -20,11 +20,11 @@ Architect targets two use cases:
 1. **Previewing** - code runs locally and can be opened in a web browser
 2. **Testing** - code runs headlessly in a terminal
 
-Follow the [quickstart](/en/guides/get-started/quickstart) to get everything wired up. `npx sandbox` kicks up a local web server and creates tables and indexes defined in your `.arc` file for previewing work. 
+Follow the [quickstart](/en/guides/get-started/quickstart) to get everything wired up. `npx sandbox` kicks up a local web server and creates tables and indexes defined in your `app.arc` file for previewing work. 
 
 If you want to write tests (and we very much think you should!) against the infra without deployment you'll need to set up the `sandbox` as a module.
 
-This guide will use the following example `.arc` file:
+This guide will use the following example `app.arc` file:
 
 ```bash
 @app
@@ -156,7 +156,7 @@ As your app matures you will want to augment these tests with more elaborate res
 
 ## DB testing
 
-In an `.arc` defined project `NODE_ENV` is used for knowing where the code is running. This way apps with `NODE_ENV` set to `staging` or `production` will load the correct DynamoDB endpoints. Your test suite and any client wrappers you author should follow suit.
+In an `app.arc` defined project `NODE_ENV` is used for knowing where the code is running. This way apps with `NODE_ENV` set to `staging` or `production` will load the correct DynamoDB endpoints. Your test suite and any client wrappers you author should follow suit.
 
 ```javascript
 // tests/db-test.js
@@ -182,7 +182,7 @@ test('arc.sandbox.db.start', t=>{
 test('db', t=> {
   t.plan(1)
   // note: we do not need to create the tables the
-  // sandbox detected the .arc and did that above
+  // sandbox detected the app.arc and did that above
   db.listTables({}, function _list(err, result) {
     if (err) throw err
     t.ok(result, 'got result')

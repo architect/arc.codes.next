@@ -9,9 +9,9 @@ sections:
 
 ## Overview
 
-The Architect manifest file is the core of your apps functionality. All projects have a lightweight `.arc` (or `app.arc`, `arc.yaml`, or `arc.json`) manifest file in the root. This project manifest file defines the application primitives used to generate your apps infrastructure.
+The Architect manifest file is the core of your apps functionality. All projects have a lightweight `app.arc` (or `arc.yaml`, or `arc.json`) manifest file in the root. This project manifest file defines the application primitives used to generate your apps infrastructure.
 
-The `.arc` manifest format makes it quick to spin up new functions into your app. Resources like HTTP Functions are defined within pragmas that can be ordered arbitrarily. Comments are preceded by a `#`.
+The `app.arc` manifest format makes it quick to spin up new functions into your app. Resources like HTTP Functions are defined within pragmas that can be ordered arbitrarily. Comments are preceded by a `#`.
 
 ```bash
 # This is going to be great!
@@ -22,7 +22,7 @@ testapp
 get /api
 post /api
 ```
-**The `.arc` manifest can be broadly split into three sections:**
+**The `app.arc` manifest can be broadly split into three sections:**
 
 ### Global system config
 
@@ -50,11 +50,11 @@ These sections deal with config of various persistence resources.
 - [`@tables`](/reference/tables) Database tables and trigger functions (DynamoDB)
 - [`@indexes`](/reference/indexes) Table global secondary indexes (DynamoDB)
 
-> 👉🏽 `.arc` comments out anything after hash symbol `#`. 
+> 👉🏽 `app.arc` comments out anything after hash symbol `#`. 
 
 ## Creating new resources & files
 
-Here we'll provision an extensive Architect project with the following .arc file:
+Here we'll provision an extensive Architect project with the following app.arc file:
 
 ```bash
 # This is going to be great!
@@ -105,7 +105,7 @@ Running arc init creates the following code:
 │   └── http
 │       ├── get-index/
 │       └── get-things/
-└── .arc
+└── app.arc
 ```
 If you add further pragmas, it is safe to run (and re-run) arc init to generate further code.
 

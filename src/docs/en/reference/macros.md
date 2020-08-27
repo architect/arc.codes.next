@@ -13,7 +13,7 @@ Extend the functionality of your Architect app with standard CloudFormation. The
 
 ## Getting started
 
-An example `.arc` file with custom macro:
+An example `app.arc` file with custom macro:
 
 ```bash
 @app
@@ -41,11 +41,11 @@ You deploy a macro by using this syntax:
 
 ## Examples
 
-Macros receive the parsed `.arc` file so custom pragmas and config can be defined. The second argument is the current CloudFormation template. 
+Macros receive the parsed `app.arc` file so custom pragmas and config can be defined. The second argument is the current CloudFormation template. 
 
 ```js
 /**
- * @param {object} arc - the parsed .arc file currently executing
+ * @param {object} arc - the parsed app.arc file currently executing
  * @param {object} cloudformation - the current AWS::Serverless CloudFormation template
  * @param {object} stage - the application stage (one of `staging` or `production`)
  **/

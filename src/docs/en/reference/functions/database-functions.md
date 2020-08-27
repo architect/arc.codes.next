@@ -10,7 +10,7 @@ sections:
 
 ## Overview
 
-Architect database functions are a log of information about changes to items in a DynamoDB table. When you enable a stream on a table under the `@tables` pragma in your `.arc` file, DynamoDB captures information about every modification to data items in the table.
+Architect database functions are a log of information about changes to items in a DynamoDB table. When you enable a stream on a table under the `@tables` pragma in your `app.arc` file, DynamoDB captures information about every modification to data items in the table.
 
 This functionality is commonly used to stream data to other sources and provide data-based event triggers. (eg. when I add new user row to the accounts table …send a welcome email)
 

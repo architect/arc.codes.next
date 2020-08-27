@@ -16,7 +16,7 @@ Starts a local web server and in-memory database for previewing code defined by 
 ## Command Line Usage and Flags
 Sandbox can be called directly from the command line, `arc sandbox`, or a JavaScript API. This makes it a great environment to preview work and invoke functions during automated testing.
 
-Sandbox starts by parsing the `.arc` file, hydrating function dependencies, starting a database, and if available, running startup scripts and loading environment variables. 
+Sandbox starts by parsing the `app.arc` file, hydrating function dependencies, starting a database, and if available, running startup scripts and loading environment variables. 
 ```bash
 arc sandbox
 ```
@@ -51,11 +51,11 @@ By default, Sandbox is run in verbose mode. You can explicitly use [-v, --verbos
 
 
 ### Local Database
-Sandbox creates an in-memory instance of [dynalite](https://github.com/mhart/dynalite) with `@tables` and `@indexes` found in the `.arc` file. When Sandbox is terminated, any data written is cleared from memory. The default endpoint is `http://localhost:5000`. You can set a custom port by using an environment variable, `ARC_TABLES_PORT=5555`
+Sandbox creates an in-memory instance of [dynalite](https://github.com/mhart/dynalite) with `@tables` and `@indexes` found in the `app.arc` file. When Sandbox is terminated, any data written is cleared from memory. The default endpoint is `http://localhost:5000`. You can set a custom port by using an environment variable, `ARC_TABLES_PORT=5555`
 
 ### File Watching and Dependency Hydration
 While Sandbox is running, it will watch:
-- `.arc` file changes
+- `app.arc` file changes
 - `src/views` and `src/shared` file changes
 - contents of your `@static` folder, if fingerprinting is enabled. 
 

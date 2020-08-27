@@ -72,7 +72,6 @@ Example basic cloud function `package.json`:
 }
 ```
 
-
 ### Removed
 A number of Architect v5 workflows have since been deprecated, including:
 - **`npx create`** - **Replaced**
@@ -159,6 +158,7 @@ If your HTTP functions are authored in `async/await` style without `arc.http.asy
 #### Example (before)
 ```javascript
 // `async/await` Arc 5 function is incompatible with Arc 6
+
 exports.handler = async function handler(request) {
   let name = request.body.email   // Accessor will fail, as `request.body` is no longer automatically parsed
   return {

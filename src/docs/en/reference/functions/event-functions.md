@@ -25,7 +25,7 @@ Event functions are fast, lightweight, stateless, isolated, highly durable, and 
 
 ## Getting started
 
-Events are defined in the `.arc` manifest file under the `@events` pragma:
+Events are defined in the `app.arc` manifest file under the `@events` pragma:
 
 ```bash
 @app
@@ -44,7 +44,7 @@ account-check-email
 
 ### Provisioning new event functions
 
-To provision a new event function, in the root of your project, open your app's Architect project manifest file (usually `.arc`):
+To provision a new event function, in the root of your project, open your app's Architect project manifest file (usually `app.arc`):
 
 1. Find your project's `@events` pragma
   - If you don't already have one, add to a new line: `@events`
@@ -83,12 +83,12 @@ Additionally `AWS::SSM::Parameter` resources are created for every SNS Topic whi
 
 ### Event Subscribers
 
-Running `arc init` with the `.arc` file above will generate the following local source code:
+Running `arc init` with the `app.arc` file above will generate the following local source code:
 
 - `/src/events/account-signup`
 - `/src/events/account-check-email`
 
-These are event handlers subscribed to the event name defined in `.arc`.
+These are event handlers subscribed to the event name defined in `app.arc`.
 
 > Events are supported by `arc sandbox`
 

@@ -8,7 +8,7 @@ sections:
 
 ## Project Layout
 
-Architect projects have a `.arc`, `arc.yaml` or `arc.json` manifest file in the root. This captures the infrastructure requirements beside the code it will run in your revision control. Architect favors <em>convention over configuration</em> and projects have the following significant folder structure:
+Architect projects have a `app.arc`, `arc.yaml` or `arc.json` manifest file in the root. This captures the infrastructure requirements beside the code it will run in your revision control. Architect favors <em>convention over configuration</em> and projects have the following significant folder structure:
 
 ```bash
 .
@@ -22,7 +22,7 @@ Architect projects have a `.arc`, `arc.yaml` or `arc.json` manifest file in the 
 │   ├── scheduled ... Scheduled Lambda functions
 │   ├── tables ...... Table Trigger Lambda functions
 │   └── ws .......... Web Socket Lambda functions      
-└── .arc
+└── app.arc
 ```
 
 All folders are **OPTIONAL**. Architect ignores any other folders.
@@ -31,11 +31,11 @@ All folders are **OPTIONAL**. Architect ignores any other folders.
 
 ## Manifest format overview
 
-The .arc manifest format is intentionally simple to author and straightforward to read.
+The app.arc manifest format is intentionally simple to author and straightforward to read.
 
 Resources are defined within pragmas, pragmas can be ordered arbitrarily, and comments are preceded by a #:
 
-**The `.arc` manifest can be broadly split into three sections:**
+**The `app.arc` manifest can be broadly split into three sections:**
 
 ### Global system config
 
@@ -63,11 +63,11 @@ These sections deal with config of various persistence resources.
 - [`@tables`](/reference/tables) Database tables and trigger functions (DynamoDB)
 - [`@indexes`](/reference/indexes) Table global secondary indexes (DynamoDB)
 
-> 👉🏽 `.arc` comments out anything after hash symbol `#`. 
+> 👉🏽 `app.arc` comments out anything after hash symbol `#`. 
 
 ### Example
 
-Provision a project with the following `.arc` file:
+Provision a project with the following `app.arc` file:
 
 ```
 # this is going to be great!
@@ -92,7 +92,7 @@ Running `npx create` creates the following code:
 │   └── http
 │       ├── get-index/index.js
 │       └── get-posts/index.js
-└── .arc
+└── app.arc
 ```
 
 The generated code was also immediately deployed to the built-in `staging` environment. Subsequent edits to the local code are deployed by running `npx deploy`.

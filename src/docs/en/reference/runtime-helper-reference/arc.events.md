@@ -11,7 +11,7 @@ sections:
 
 Event functions are special Lambda functions that enable a pub/sub message bus using AWS SNS. Architect has helpful methods for working with JSON payloads, service discovery, and make responses compatible with Lambda function signatures.
 
-Functions defined by `@event` in the `.arc` file correspond to an SNS topic and a Lambda function handler. There are two methods you can use `publish()` and `subscribe()`. In order to use it, you must `npm install @architect/functions` to the function folder and require it at the top. 
+Functions defined by `@event` in the `app.arc` file correspond to an SNS topic and a Lambda function handler. There are two methods you can use `publish()` and `subscribe()`. In order to use it, you must `npm install @architect/functions` to the function folder and require it at the top. 
 
 A common pattern is creating a POST endpoint with an HTTP function that publishes JSON to the event function. This allows for events to be captured from the client that can branch separate asynchronous tasks like signing up for a newsletter or saving telemetry data.
 

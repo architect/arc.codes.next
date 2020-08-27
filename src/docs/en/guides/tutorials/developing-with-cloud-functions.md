@@ -156,13 +156,13 @@ Here we'll start from a basic 'hello world' app example and then build a bigger 
 
 We'll do this using **AWS Lambdas** (small functions that trigger when their URL is hit.) You can think of lambdas as the equivalent of 'routes' in traditional web apps. 
 
-AWS Lambdas are accessed via API Gateway, but `.arc` abstracts API Gateway and Lambda configuration and provisioning so that creating a lambda function is a smooth and seamless experience.
+AWS Lambdas are accessed via API Gateway, but `app.arc` abstracts API Gateway and Lambda configuration and provisioning so that creating a lambda function is a smooth and seamless experience.
 
 ### Hello world
 
 Let's begin by provisioning a lambda function that will serve as the root of our app and give a simple `hello world` HTML response. 
 
-Given the following example `.arc` file:
+Given the following example `app.arc` file:
 
 ```bash
 @app
@@ -292,7 +292,7 @@ exports.handler = async function http(req) {
 
 Let's implement a proof-of-concept login flow. There's [a repo with the example below on GitHub](https://github.com/architect/arc-example-login-flow).
 
-This example `.arc` project brings together all the concepts for defining HTTP Lambdas:
+This example `app.arc` project brings together all the concepts for defining HTTP Lambdas:
 
 ```bash
 @app
@@ -316,7 +316,7 @@ post /login
 │   │   ├── get-protected/
 │   │   └── post-login/
 │   └── shared/
-├── .arc
+├── app.arc
 └── package.json
 ```
 

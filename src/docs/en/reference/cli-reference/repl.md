@@ -20,7 +20,7 @@ Architect comes with helpful terminal access to your data in the form of a `repl
 
 ## Usage
 
-- `arc repl` connects to a local in memory representation of `.arc`
+- `arc repl` connects to a local in memory representation of `app.arc`
 - `arc repl staging` connects to staging tables and indexes
 - `arc repl production` connects to production tables and indexes
 

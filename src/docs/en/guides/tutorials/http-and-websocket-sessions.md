@@ -75,7 +75,7 @@ exports.handler = async function http(req) {
 
 If you have stricter security requirements and do not want to expose any session state to clients you can opt into sessions backed by DynamoDB tables.
 
-You'll need to define a session table in your `.arc` file with `_idx` partition key and `_ttl` attribute for token expiry:
+You'll need to define a session table in your `app.arc` file with `_idx` partition key and `_ttl` attribute for token expiry:
 
 ```bash
 @app
@@ -138,7 +138,7 @@ mkdir -p ./mysesh
 cd mysesh
 ```
 
-2. Create a `.arc` file
+2. Create a `app.arc` file
 
 ```bash
 @app

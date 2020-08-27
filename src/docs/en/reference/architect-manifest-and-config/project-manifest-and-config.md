@@ -2,7 +2,7 @@
 title: Project manifest &amp; config
 description: 160 (or fewer) character description of this document!
 sections:
-  - .arc
+  - app.arc
   - JSON
   - YAML
   - TOML
@@ -11,7 +11,7 @@ sections:
 
 Developers that prefer JSON or YAML can opt into using either syntax in arc.json or arc.yaml, respectively (instead of .arc or app.arc).
 
-## .arc example
+## app.arc example
 
 ```bash
 # This is going to be great!

@@ -19,11 +19,11 @@ Every function respects the dependencies found in the root of the function. This
 ```bash
 mkdir arc-deps-app
 cd arc-deps-app
-touch .arc
+touch app.arc
 ```
-Now we can write a `.arc` file with two HTTP functions as follows:
+Now we can write a `app.arc` file with two HTTP functions as follows:
 ```md
-# .arc file
+# app.arc file
 @app
 arc-deps-app
 
@@ -31,7 +31,7 @@ arc-deps-app
 get /deps
 post /echo
 ```
-Once you have the `.arc` file, you can run `arc create` or `arc init` to scaffold the function folders. In each folder we're going to install `@architect/functions`, a runtime helper library. Since each function is isolated, we need to create a `package.json` and `npm install` the module we want.
+Once you have the `app.arc` file, you can run `arc create` or `arc init` to scaffold the function folders. In each folder we're going to install `@architect/functions`, a runtime helper library. Since each function is isolated, we need to create a `package.json` and `npm install` the module we want.
 
 ```bash
 cd src/http/get-deps

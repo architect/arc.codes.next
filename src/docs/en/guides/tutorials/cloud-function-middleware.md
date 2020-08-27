@@ -41,9 +41,9 @@ mkdir arc-async-middleware
 cd arc-async-middleware
 arc init
 ```
-2. Replace the `.arc` file with the following:
+2. Replace the `app.arc` file with the following:
 ```md
-# .arc file
+# app.arc file
 @app
 arc-async
 
@@ -149,9 +149,9 @@ mkdir arc-http-middleware
 cd arc-http-middleware
 arc init
 ```
-2. Replace the `.arc` file with the following:
+2. Replace the `app.arc` file with the following:
 ```md
-# .arc file
+# app.arc file
 @app
 arc-http-middleware
 

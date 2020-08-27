@@ -35,9 +35,9 @@ Architect provides endpoints pre-configured with Lambda handler functions deploy
 
 ### Provision
 
-Your `.arc` manifest file abstracts API Gateway configuration and provisioning, while `@architect/functions` (optionally) adds a very light but powerful API to Lambda for working with WebSockets. You provision WebSocket functions by adding the `ws` pragma to your `.arc` manifest file.
+Your `app.arc` manifest file abstracts API Gateway configuration and provisioning, while `@architect/functions` (optionally) adds a very light but powerful API to Lambda for working with WebSockets. You provision WebSocket functions by adding the `ws` pragma to your `app.arc` manifest file.
 
-This `.arc` file defines both HTTP and WebSocket endpoints:
+This `app.arc` file defines both HTTP and WebSocket endpoints:
 
 ```bash
 @app
@@ -61,7 +61,7 @@ Running `arc init` generates the following functions in your project:
 |   |-connect/
 |   |-default/
 |   '-disconnect/
-'-.arc
+'-app.arc
 ```
 
 Architect generates the following predefined routes that can be used: `connect`, `disconnect`, and `default`. In addition, you can create custom routes.

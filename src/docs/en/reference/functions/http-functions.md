@@ -14,9 +14,9 @@ sections:
 
 ### Create full-featured web applications composed of fast, tiny HTTP functions
 
-HTTP Functions are the building blocks of the modern web app. They are actually AWS Lambdas which are small functions that trigger when their endpoint is hit. You can think of lambdas as the equivalent of 'routes' in traditional web apps. AWS Lambdas are accessed via API Gateway, but Architect (`.arc`) abstracts API Gateway and Lambda configuration + provisioning to give us **HTTP Functions**. HTTP Functions are fast, lightweight, stateless, isolated, highly durable, and require no configuration.
+HTTP Functions are the building blocks of the modern web app. They are actually AWS Lambdas which are small functions that trigger when their endpoint is hit. You can think of lambdas as the equivalent of 'routes' in traditional web apps. AWS Lambdas are accessed via API Gateway, but Architect (`app.arc`) abstracts API Gateway and Lambda configuration + provisioning to give us **HTTP Functions**. HTTP Functions are fast, lightweight, stateless, isolated, highly durable, and require no configuration.
 
-Each `@http` function defined in your Architect project manifest(.arc), results in the creation of a corresponding HTTP route and AWS Lambda function (wired to that HTTP route in [API Gateway](https://aws.amazon.com/api-gateway/)). You can think of HTTP Function as its own tiny app with a single responsibility: handling all business logic related to its corresponding HTTP route.
+Each `@http` function defined in your Architect project manifest(app.arc), results in the creation of a corresponding HTTP route and AWS Lambda function (wired to that HTTP route in [API Gateway](https://aws.amazon.com/api-gateway/)). You can think of HTTP Function as its own tiny app with a single responsibility: handling all business logic related to its corresponding HTTP route.
 
 HTTP Functions do not require dependencies, and feature a minimal but powerful low-level API that can be optionally extended (and further simplified) with our runtime library (@architect/functions).
 
@@ -64,7 +64,7 @@ No sweat, right?
 
 HTTP functions are defined under the `@http` pragma, with one route per line. A route in Architect is defined as: an HTTP verb (`get`, `post`, etc) and a path separated by a space (e.g. get /foo/bar). 
 
-To provision a new HTTP Function, in the root of your project, open your app's Architect project manifest file (`.arc`):
+To provision a new HTTP Function, in the root of your project, open your app's Architect project manifest file (`app.arc`):
 
 1. Find your project's `@http` pragma
     - If you don't already have one, just add @http

@@ -30,10 +30,10 @@ In this tutorial, we will create an event topic, POST JSON data to invoke a subs
 npm init @architect ./arc-event-app
 cd arc-event-app
 ```
-2. Open up your `.arc` file and add the `@event` pragma along with a POST route 
+2. Open up your `app.arc` file and add the `@event` pragma along with a POST route 
 
 ```md
-# .arc
+# app.arc
 @app
 arc-event-app
 
@@ -45,7 +45,7 @@ post /yolo
 yolo
 ```
 
-Run the command `arc init` to scaffold the functions that are declared in the `.arc` file.
+Run the command `arc init` to scaffold the functions that are declared in the `app.arc` file.
 
 Now we can write our `get-index` handler. This function handler sends an HTML form to the client, and allows them to make a POST request to the `/yolo` endpoint. 
 
@@ -68,7 +68,7 @@ Now we can write our `get-index` handler. This function handler sends an HTML fo
   }
 ```
 
-Next we're going to create a new event function in `/src/events/yolo/`. This function is automatically subscribed to the topic created from the `.arc` file and will receive a JSON payload published to the event name.
+Next we're going to create a new event function in `/src/events/yolo/`. This function is automatically subscribed to the topic created from the `app.arc` file and will receive a JSON payload published to the event name.
 ```javascript
 // src/events/yolo/index.js
 let arc = require('@architect/functions')
@@ -117,17 +117,17 @@ npm start
 Navigate to http://localhost:3333 and click the "YOLO" button, watch your terminal for the output. You should see Sandbox output the `@event` object and log the output of your `yolo` event function.
 
 ## @scheduled example
-Another common background task is `@scheduled` functions. These functions are invoked on a schedule defined in the `.arc` file. These functions are good for cleanup tasks or kicking off other kinds of health checks. Let's make a new project and add a `@scheduled` function. 
+Another common background task is `@scheduled` functions. These functions are invoked on a schedule defined in the `app.arc` file. These functions are good for cleanup tasks or kicking off other kinds of health checks. Let's make a new project and add a `@scheduled` function. 
 
 The first thing we will need is a fresh Architect project. We can create one directly from the terminal.
 ```bash
 npm init @architect ./arc-scheduled-app
 cd arc-scheduled-app
 ```
-Now we can open up the `.arc` file and add a scheduled function to the manifest.
+Now we can open up the `app.arc` file and add a scheduled function to the manifest.
 
 ```md
-# .arc
+# app.arc
 
 # your project namespace
 @app 
@@ -216,10 +216,10 @@ Let's make an example message queue by starting with a fresh Architect project.
 npm init @architect ./arc-queues-app
 cd arc-queues-app
 ```
-Open up the `.arc` file and modify the manifest to include our `@queues` function as follows: 
+Open up the `app.arc` file and modify the manifest to include our `@queues` function as follows: 
 
 ```md
-# .arc
+# app.arc
 @app
 arc-queues-app
 
@@ -229,7 +229,7 @@ get /
 @queues
 account-signup
 ```
-When you modify the `.arc` file, you can run `arc init` from the project root to scaffold the function folders. 
+When you modify the `app.arc` file, you can run `arc init` from the project root to scaffold the function folders. 
 
 The queue function uses SQS as an event source. You can use this pattern to move data between Lambda functions and using the queue as a temporary data store. To write a queue function, make a new file in `src/queues/`
 

@@ -36,9 +36,9 @@ In this example, we will create an example helper that all of our functions will
 ```bash
 npm init @architect ./arc-shared-views
 ```
-2. Next we can modify the `.arc` file in the root of the project with the following: 
+2. Next we can modify the `app.arc` file in the root of the project with the following: 
 ```md 
-# .arc file
+# app.arc file
 @app 
 arc-shared
 
@@ -102,7 +102,7 @@ exports.handler = async function http (req) {
 │       ├── get-answer/
 |   └── shared/
 |       ├── helper.js
-├── .arc
+├── app.arc
 └── package.json
 ```
 
@@ -112,7 +112,7 @@ When you navigate to http://localhost:3333/answer you will be greeted with data 
 
 The `src/views` folder is a special location that allows you to include code for each of your HTTP functions with a GET route. Continuing with our `/src/shared` example we will include a layout template that your HTTP functions can use.
 
-1. Modify the `.arc` file to match the following:
+1. Modify the `app.arc` file to match the following:
 
 ```md
 @app
@@ -152,7 +152,7 @@ module.exports = function Layout (props) {
 `
 }
 ```
-This is our shared view template that will be used by each GET route listed under the `@views` pragma in the `.arc` file. 
+This is our shared view template that will be used by each GET route listed under the `@views` pragma in the `app.arc` file. 
 
 4. Next we'll modify `src/http/get-index/index.js` with the following: 
 
@@ -213,7 +213,7 @@ exports.handler = async function http (request) {
 ```
 When `/about` is requested, this function will execute and be able to return the data being passed into `Layout()`. 
 
-6. Finally we have some finer control over which GET functions will have `/src/views` copied into it. We do this with the `@views` pragma in the `.arc` file. 
+6. Finally we have some finer control over which GET functions will have `/src/views` copied into it. We do this with the `@views` pragma in the `app.arc` file. 
 We want to create an URL to our style sheet, but this function doesn't need access to the layout code. Only the GET routes under `@views` will have the `src/views` code copied into it. Our first route of `/answer` won't have the `src/views` modules copied into `node_modules`. 
 
 Now we can modify the code in `/src/http/get-css-000stylesheet/index.js` with the following: 

@@ -13,9 +13,9 @@ The `init` command will bootstrap new Architect projects and local folders. It u
 
 ## Usage
 
-Run `arc init` in an empty directory will create a default `.arc` manifest file named after that directory with one default function `src/http/get-index`. 
+Run `arc init` in an empty directory will create a default `app.arc` manifest file named after that directory with one default function `src/http/get-index`. 
 
-Edit the `.arc` file to add functions and re-run `arc init` to generate local code. This command is intended to be run and re-run; it will only generate files if they do not already exist.
+Edit the `app.arc` file to add functions and re-run `arc init` to generate local code. This command is intended to be run and re-run; it will only generate files if they do not already exist.
 
 ## Flags
 

@@ -33,7 +33,7 @@ Architect `@tables` defines DynamoDB tables and `@indexes` define global seconda
 
 ### Work Locally
 
-Tables are defined in your `.arc` manifest file under `@tables` and `@indexes`:
+Tables are defined in your `app.arc` manifest file under `@tables` and `@indexes`:
 
 ```bash
 @app
@@ -56,7 +56,7 @@ accounts
   email *String
 ```
 
-> **Note**: `.arc` creates fully isolated tables for `staging` and `production`. Running `arc sandbox` will mount the current `.arc` into a local in memory database on `http://localhost:5000`.
+> **Note**: `app.arc` creates fully isolated tables for `staging` and `production`. Running `arc sandbox` will mount the current `app.arc` into a local in memory database on `http://localhost:5000`.
 
 ### Tables
 
@@ -122,7 +122,7 @@ senzitiveData
 
 ## IAM Permissions
 
-By default all runtime functions generated with Architect have one generated [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege ) with the least privileges possible. This means Lambda functions can only access other resources defined in the same `.arc` file.
+By default all runtime functions generated with Architect have one generated [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege ) with the least privileges possible. This means Lambda functions can only access other resources defined in the same `app.arc` file.
 
 For `@tables` only the following IAM actions are allowed at runtime:
 
@@ -269,7 +269,7 @@ def handler(event, context):
 
 DynamoDB has a feature which [lets you recover your data](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PointInTimeRecovery.html) to any point in time over the last 35 days (from the time its enabled).
 
-This is not enabled by default. To enable this for a given table, within your `.arc` file:
+This is not enabled by default. To enable this for a given table, within your `app.arc` file:
 
 ```bash
 @tables

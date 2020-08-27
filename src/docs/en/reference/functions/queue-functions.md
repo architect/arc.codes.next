@@ -23,9 +23,9 @@ Read the official [AWS docs on Lambda retry behavior](https://docs.aws.amazon.co
 
 ### Work Locally
 
-Queues are defined in the `.arc` manifest file under the `@queues` pragma:
+Queues are defined in the `app.arc` manifest file under the `@queues` pragma:
 
-This `.arc` file defines two `@queues`:
+This `app.arc` file defines two `@queues`:
 
 ```bash
 @app
@@ -42,7 +42,7 @@ Which generates the corresponding code:
 ├── queues
 │   ├── convert-image/
 │   └── publish-log/
-├── .arc
+├── app.arc
 └── package.json
 ```
 
@@ -58,12 +58,12 @@ Which generates the corresponding code:
 
 ### Queue Subscribers
 
-Running `arc init` with the `.arc` file above will generate the following local source code:
+Running `arc init` with the `app.arc` file above will generate the following local source code:
 
 - `/src/queues/convert-image`
 - `/src/queues/publish-log`
 
-These are queue handlers subscribed to the queue name defined in `.arc`.
+These are queue handlers subscribed to the queue name defined in `app.arc`.
 
 > Queues are supported by `arc sandbox`
 

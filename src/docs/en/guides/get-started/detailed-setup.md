@@ -153,10 +153,10 @@ Run `arc init` to generate a basic project:
 ├── src
 │   └── http
 │       └── get-index/index.js
-└── .arc
+└── app.arc
 ```
 
-Check out your first `.arc` file & HTTP function!
+Check out your first `app.arc` file & HTTP function!
 
 ```bash
 # /project/path/.arc

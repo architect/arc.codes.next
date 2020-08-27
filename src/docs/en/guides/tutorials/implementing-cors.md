@@ -12,7 +12,7 @@ Cross-origin resource sharing (CORS) is a mechanism that that uses additional HT
 
 ## Example
 
-Let's first create a `.arc` app with a very simple JSON API endpoint:
+Let's first create a `app.arc` app with a very simple JSON API endpoint:
 
 ```bash
 @app

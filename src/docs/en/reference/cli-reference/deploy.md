@@ -13,7 +13,7 @@ sections:
 
 This module also deploys code found in `/src` to `staging`. If `ARC_DEPLOY=production` is set, the code in `/src` will be deployed to `production`. (A lot of other things happen under the hood, outlined below.)
 
-If the local `.arc` file has defined (and created) `@static` folders, they are deployed to the an S3 bucket. 
+If the local `app.arc` file has defined (and created) `@static` folders, they are deployed to the an S3 bucket. 
 
 **To deploy your project to AWS, you'll need:**
 
@@ -34,7 +34,7 @@ If the local `.arc` file has defined (and created) `@static` folders, they are d
 3.) Populates each function with [`arc` shared code](/guides/sharing-common-code) via `/src/shared`
 4.) Compresses and uploads each function directory to its corresponding Lambda function
 
-> Reminder: All `arc` NPM scripts require `profile` and `region` variables set, either as  environment variables or in `@aws` within your `.arc` manifest. Learn more in the [Prerequisites guide](/quickstart).
+> Reminder: All `arc` NPM scripts require `profile` and `region` variables set, either as  environment variables or in `@aws` within your `app.arc` manifest. Learn more in the [Prerequisites guide](/quickstart).
 
 ## Usage
 

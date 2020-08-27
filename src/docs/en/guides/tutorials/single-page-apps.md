@@ -28,7 +28,7 @@ There are many ways to build a single-page application. Larger applications can 
 
 Architect provides two methods to proxy static assets through API Gateway. This means your single page application and API can share the same domain name, session support and database access *without CORS* and *without 3rd party proxies*. 
 
-For this guide we'll use the following `.arc` file:
+For this guide we'll use the following `app.arc` file:
 
 ```bash
 @app
@@ -57,7 +57,7 @@ exports.handler = arc.proxy.public()
 
 Now all static assets in `./public` will be served from the root of your application.
 
-The `arc.proxy.public` function accepts an optional configuration param `spa` which will force loading `index.html` no matter what route is invoked (note however that routes defined in `.arc` will take precedence). 
+The `arc.proxy.public` function accepts an optional configuration param `spa` which will force loading `index.html` no matter what route is invoked (note however that routes defined in `app.arc` will take precedence). 
 
 ```javascript
 // src/http/get-index/index.js
@@ -204,9 +204,9 @@ npm init -f
 npm install react react-dom parcel-bundler @architect/sandbox
 ```
 
-2. Update the build folder configuration in `.arc`
+2. Update the build folder configuration in `app.arc`
 
-Edit the `.arc` file in the root of your project directory so it shows the following:
+Edit the `app.arc` file in the root of your project directory so it shows the following:
 
 ```bash
 @app

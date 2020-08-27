@@ -44,9 +44,9 @@ region=us-east-1
 ```
 This keeps your sensitive credential keys (`~/.aws/credentials`) separate from non-sensitive configuration (`~/.aws/config`). 
 
-You can specify the AWS profile that your Architect project will use to deploy in the `.arc` file under the `@aws` pragma 
+You can specify the AWS profile that your Architect project will use to deploy in the `app.arc` file under the `@aws` pragma 
 ```md
-# .arc
+# app.arc
 @aws
 profile work
 ```
@@ -65,4 +65,4 @@ Current ways to set these variables:
 
 > Tip: Windows users will want to use [cross-env](https://www.npmjs.com/package/cross-env) for cross platform env vars.
 
-Architect will first give priority to credentials and configurations in the `.arc` file, then the local credentials file, and then environment variables.
+Architect will first give priority to credentials and configurations in the `app.arc` file, then the local credentials file, and then environment variables.

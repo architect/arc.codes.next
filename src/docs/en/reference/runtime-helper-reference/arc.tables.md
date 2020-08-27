@@ -17,7 +17,7 @@ sections:
 ## Overview
 
 `arc.tables(callback)`
-Returns an object that can be used to access data in database tables as defined under `@tables` in your `.arc` file. For example, given the following .arc file snippet:
+Returns an object that can be used to access data in database tables as defined under `@tables` in your `app.arc` file. For example, given the following app.arc file snippet:
 ```
 @tables
 accounts

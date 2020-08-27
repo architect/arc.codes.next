@@ -11,7 +11,7 @@ sections:
 
 Architect allows you to read & write environment variables that are immediately made available to all deployed Lambda functions. An environment variable is a variable whose value is set outside the program. Sensitive configuration data, such as API keys, needs to happen outside of the codebase in revision control. You can use this tool to ensure an entire team, and the deployment targets are in sync.
 
-> Currently `.arc` uses AWS Systems Manager Parameter Store as a centralized backing storage mechanism for app environment variables. [Read more about AWS Systems Manager Parameter Store.](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html)
+> Currently `app.arc` uses AWS Systems Manager Parameter Store as a centralized backing storage mechanism for app environment variables. [Read more about AWS Systems Manager Parameter Store.](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html)
 
 ### The `.arc-env` File
 
@@ -37,7 +37,7 @@ FOO 3
 
 ## Usage
 
-- `arc env` displays environment variables for the current `.arc`
+- `arc env` displays environment variables for the current `app.arc`
 - `arc env staging FOOBAZ somevalue` writes env variable `FOOBAZ=somevalue` to staging Lambda functions
 - `arc env production FOOBAR othervalue` writes env variable `FOOBAR=othervalue` to production Lambda functions
 - `arc env remove staging FOOBAZ` removes env variable `FOOBAZ=somevalue` from the staging Lambda functions

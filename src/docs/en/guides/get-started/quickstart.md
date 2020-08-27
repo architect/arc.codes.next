@@ -20,13 +20,13 @@ cd testapp
 ├── src
 │   └── http
 │       └── get-index/index.js
-└── .arc
+└── app.arc
 ```
 
-4. Check out your first `.arc` file & HTTP function!
+4. Check out your first `app.arc` file & HTTP function!
 
 ```bash
-# /project/path/.arc
+# /project/path/app.arc
 @app
 your-app-name
 

@@ -100,6 +100,7 @@ In this example you can query for an account by their username or email!
 ## Encryption
 
 **AWS Managed**
+
 By default tables are not encrypted. To enable encryption: Add `encrypt true` to any table:
 
 ```bash
@@ -110,6 +111,7 @@ Customer Managed Key
 ```
 
 **Customer Managed Key**
+
 Add encrypt `someValue` where `someValue` can be a CMK key ID, Amazon Resource Name (ARN), alias name, or alias ARN
 
 ```bash
@@ -141,16 +143,22 @@ For `@tables` only the following IAM actions are allowed at runtime:
 
 > Note: wider account access can be explicitly granted with custom resource policies
 
+---
+
 ## Deploy
 
 - `arc deploy` to deploy with CloudFormation to staging
 - `arc deploy production` to run a full CloudFormation production deployment
+
+---
 
 ## REPL
 
 - `arc repl` to connect to a local in memory sandbox
 - `arc repl staging` to connect to staging tables
 - `arc repl production` to connect to production tables
+
+---
 
 ## Write Data
 
@@ -279,6 +287,8 @@ This is not enabled by default. To enable this for a given table, within your `a
 myTable
     PointInTimeRecovery true
 ```
+
+---
 
 ## Time To Live
 

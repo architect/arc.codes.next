@@ -1,10 +1,9 @@
 ---
 title: Database functions
-description: 160 (or fewer) character description of this document!
+description: A log of information about changes to items in a DynamoDB table
 sections:
   - Overview
   - Getting started
-  - Events
   - Examples
 ---
 
@@ -26,20 +25,41 @@ You can create a database function with this syntax:
 
 ```bash
 @tables
-mytable
-  pk *String
+cats
+  catID *String
   # Add `stream` and set to `true`.
   stream true
 ```
 
-Architect provisions a lambda at `src/tables/mytable/index.js` in your project, which gets an event for every write to your database (with a before/after of the data being written).
+> `arc init` creates `src/tables/cats` local code and `arc deploy` to publishes to Lambda.
 
-## Events
-
-ADD ME!
+Architect provisions a lambda at `src/tables/cats/index.js` in your project, which gets an event for every write to your database (with a before/after of the data being written).
 
 
 ## Examples
 
-ADD ME!
+**Node**
 
+```javascript
+exports.handler = async function stream(event) {
+  console.log(event)
+  return true
+}
+```
+
+**Ruby**
+
+```ruby
+def handler(event)
+  puts event
+  true
+end
+```
+
+**Python**
+
+```python
+def handler(event, context):
+    print(event)
+    return True
+```

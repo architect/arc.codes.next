@@ -83,16 +83,16 @@ let reference = [
   },
   {
     'Runtime helper reference': [
-      'arc.events',
-      'arc.http',
-      'arc.http.async',
-      'arc.http.helpers',
-      'arc.http.proxy',
-      'arc.http.session',
-      'arc.queues',
-      'arc.static',
-      'arc.tables',
-      'arc.ws',
+      'arc-events',
+      'arc-http',
+      'arc-http-async',
+      'arc-http-helpers',
+      'arc-http-proxy',
+      'arc-http-session',
+      'arc-queues',
+      'arc-static',
+      'arc-tables',
+      'arc-ws',
     ]
   },
 ]

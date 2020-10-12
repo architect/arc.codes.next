@@ -17,9 +17,11 @@ sections:
 **TL/DR**
 
 **To work locally**, all you need is:
+
 - A supported [runtime](#runtimes)
 
 **To deploy your project to AWS**, you'll need:
+
 - A supported [runtime](#runtimes)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
   - (Which requires [Python](https://www.python.org/downloads/))
@@ -28,13 +30,13 @@ sections:
   - \*nix: `~/.aws/credentials`
   - Windows: `C:\Users\USER_NAME\.aws\credentials`
 
----
 
 ### Runtimes
 
 Architect supports the following runtime versions when working locally:
 
 **Recommended**
+
 - Node: `12.x` & `10.x` using `npm`
 - Ruby: `2.5` using `bundle`
 - Python: `3.7` & `3.6` using `pip3`
@@ -49,7 +51,7 @@ To use the same runtime across all functions in your project, add it to your `@a
 runtime python3.7
 ```
 
-This setting can be overridden on a function-by-function basis with [`.arc-config`](/reference/arc-config/runtime).
+This setting can be overridden on a function-by-function basis with [`.arc-config`](/en/reference/architect-manifest-and-config/function-config-file).
 
 Architect also supports the following runtimes in live infra, but not while working locally (at present):
 - Go: `1.x`,
@@ -109,7 +111,7 @@ $env:AWS_PROFILE='work'
 $env:AWS_REGION='us-west-1'
 ```
 
-If you prefer, you can also use: *Control Panel » System » Advanced System Settings » Environment Variables*.
+> If you prefer, you can also use: *Control Panel » System » Advanced System Settings » Environment Variables*.
 
 ## Configure AWS CLI
 
@@ -160,6 +162,7 @@ Check out your first `app.arc` file & HTTP function!
 
 ```bash
 # /project/path/.arc
+
 @app
 your-app-name
 
@@ -186,6 +189,7 @@ Deploy your app
 ```bash
 arc deploy
 ```
+
 Congrats, you've successfully created a powerful, modern, serverless app! Nice work. 💖
 
 ## Clean Up
@@ -193,6 +197,7 @@ Congrats, you've successfully created a powerful, modern, serverless app! Nice w
 ADD ME!
 
 ### Useful links:
-* [Configuring the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
-* [Amazon Configuration and Credential Files](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
-* [Working with multiple AWS accounts](/guides/multiple-aws-accounts)
+
+- [Configuring the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+- [Amazon Configuration and Credential Files](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
+- [Working with multiple AWS accounts](/guides/multiple-aws-accounts)

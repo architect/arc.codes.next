@@ -69,6 +69,7 @@ JSON
 
 
 ## URL
+
 Architect deploys to `staging` and `production` environments with different API Gateway endpoints. The staging endpoint has `/staging` appended to it. The URL helper let's you wrap a path and it will return the correct path for the environment. 
 
 ```js
@@ -90,6 +91,7 @@ Architect has a helper for transitioning your Express apps to fully serverless a
 
 ```js
 // src/http/get-index/index.js
+
 let arc = require('@architect/functions')
 let express = require('express')
 
@@ -103,5 +105,6 @@ exports.handler = arc.http.express(app)
 `arc.http.express` is passed an app instance of `express()` and the rest of the app works just like Express. 
 
 Things to keep in mind: 
+
 - A Lambda function is stateless, so each time a user reaches this endpoint, they will receive a new instance of the entire Express server.
 - Bundling an entire app with a web server in a Lambda function will result in poor performance if the entire function’s payload (including dependencies) exceeds 5MB.

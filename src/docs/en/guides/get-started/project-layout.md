@@ -1,14 +1,21 @@
 ---
 title: Project Layout
-description: 160 (or fewer) character description of this document!
+description: Explaining the layout of an Architect project
 sections:
   - Project Layout
   - Manifest format overview
+  - Example
 ---
 
 ## Project Layout
 
-Architect projects have a `app.arc`, `arc.yaml` or `arc.json` manifest file in the root. This captures the infrastructure requirements beside the code it will run in your revision control. Architect favors <em>convention over configuration</em> and projects have the following significant folder structure:
+Architect projects have either of these three versions of a manifest file in the root that sets up your infrastructure as code. 
+
+- `app.arc`
+- `arc.yaml`
+- `arc.json` 
+
+This captures the infrastructure requirements beside the code it will run in your revision control. Architect favors *convention over configuration* and projects have the following significant folder structure:
 
 ```bash
 .
@@ -27,7 +34,7 @@ Architect projects have a `app.arc`, `arc.yaml` or `arc.json` manifest file in t
 
 All folders are **OPTIONAL**. Architect ignores any other folders.
 
-<hr>
+---
 
 ## Manifest format overview
 
@@ -65,11 +72,11 @@ These sections deal with config of various persistence resources.
 
 > 👉🏽 `app.arc` comments out anything after hash symbol `#`. 
 
-### Example
+## Example
 
 Provision a project with the following `app.arc` file:
 
-```
+```bash
 # this is going to be great!
 @app
 testapp

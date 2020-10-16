@@ -21,18 +21,18 @@ This captures the infrastructure requirements beside the code it will run in you
 .
 ├── public
 ├── src
-│   ├── shared ...... code shared by ALL Lambda functions
-│   ├── views ....... code shared by HTTP GET Lambda functions
-│   ├── http ........ HTTP Lambda functions
-│   ├── events ...... Event Lambda functions
-│   ├── queues ...... Queue Lambda functions
-│   ├── scheduled ... Scheduled Lambda functions
-│   ├── tables ...... Table Trigger Lambda functions
-│   └── ws .......... Web Socket Lambda functions      
+│   ├── shared ...... # code shared by ALL Lambda functions
+│   ├── views ....... # code shared by HTTP GET Lambda functions
+│   ├── http ........ # HTTP Lambda functions
+│   ├── events ...... # Event Lambda functions
+│   ├── queues ...... # Queue Lambda functions
+│   ├── scheduled ... # Scheduled Lambda functions
+│   ├── tables ...... # Table Trigger Lambda functions
+│   └── ws .......... # Web Socket Lambda functions      
 └── app.arc
 ```
 
-All folders are **OPTIONAL**. Architect ignores any other folders.
+> All folders are **OPTIONAL**. Architect ignores any other folders.
 
 ---
 
@@ -40,7 +40,7 @@ All folders are **OPTIONAL**. Architect ignores any other folders.
 
 The app.arc manifest format is intentionally simple to author and straightforward to read.
 
-Resources are defined within pragmas, pragmas can be ordered arbitrarily, and comments are preceded by a #:
+Resources are defined within pragmas and pragmas can be ordered arbitrarily. Comments are preceded by a #:
 
 **The `app.arc` manifest can be broadly split into three sections:**
 

@@ -47,6 +47,21 @@ let reference = [
     ]
   },
   {
+    'arc pragmas': [
+      '@app',
+      '@aws',
+      '@events',
+      '@http',
+      '@indexes',
+      '@proxy',
+      '@queues',
+      '@scheduled',
+      '@static',
+      '@tables',
+      '@ws'
+    ]
+  },
+  {
     'Static assets': [
       'Static',
       'CDN',

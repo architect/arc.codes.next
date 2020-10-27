@@ -16,9 +16,11 @@ sections:
 
 ## Overview
 
-`arc.tables(callback)`
-Returns an object that can be used to access data in database tables as defined under `@tables` in your `app.arc` file. For example, given the following app.arc file snippet:
-```
+### `arc.tables(callback)`
+
+Returns an object that can be used to access data in database tables as defined under `@tables` in your `app.arc` file. For example, given the following `app.arc` file snippet:
+
+```bash
 @tables
 accounts
   accountID *String
@@ -26,6 +28,7 @@ accounts
 messages
   msgID *String
 ```
+
 Running the following code:
 
 ```js
@@ -90,4 +93,3 @@ an instance of `DynamoDB.DocumentClient` from the `aws-sdk`
 
 ## `data._name`
 a helper for returning an environment appropriate table name
-

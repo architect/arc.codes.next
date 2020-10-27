@@ -1,4 +1,32 @@
-.wrapper { 
-  display:flex;
+:root {
+  --sidebar: 17.666rem;
+}
+.h-logo {
+  height:1.5rem;
+}
+.sidebar-w {
+  max-width: var(--sidebar);
+  min-width: var(--sidebar);
+}
+.left-sidebar {
+  left: calc(var(--sidebar) * -1);
+}
+.open,
+.transition-x {
+  transition: transform 100ms cubic-bezier(0.23, 1, 0.320, 1);
+}
+.open,
+.translate-x-sidebar {
+  transform: translateX(var(--sidebar));
 }
 
+@media only screen and (min-width:48em) {
+  .open,
+  .transition-x {
+    transition: none;
+   }
+  .open,
+  .translate-x-sidebar {
+    transform: translateX(0);
+  }
+}

@@ -93,4 +93,3 @@ an instance of `DynamoDB.DocumentClient` from the `aws-sdk`
 
 ## `data._name`
 a helper for returning an environment appropriate table name
-

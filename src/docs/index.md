@@ -1,12 +1,10 @@
-<img src="../assets/architect-logo-500b@2x.png" style="height:100">
-
 # The most powerful way to build serverless web apps with JS, Python, and Ruby
 
 **Architect provides **everything** you need to build serverless apps that are fast, modern, & MASSIVELY scalable.**
 
 Architect helps you leverage powerful **Amazon Web Services** more easily and quickly.
 
-- [Lambda](https://aws.amazon.com/lambda/) *cloud native* functions for compute 
+- [Lambda](https://aws.amazon.com/lambda/) *cloud native* functions for compute
 - [API Gateway](https://aws.amazon.com/api-gateway/) for HTTP
 - [Route53](https://aws.amazon.com/route53) for DNS
 - [CloudFront](https://aws.amazon.com/cloudfront/) for CDN

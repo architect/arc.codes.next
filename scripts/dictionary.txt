@@ -21,6 +21,7 @@ ARNs
 async
 auth
 Auth
+authorizers
 authortime
 automagical
 Automagical
@@ -42,6 +43,7 @@ BuddyBuild
 bundler
 bundlers
 CA
+Catalope
 cd
 CDN
 CDNs
@@ -64,6 +66,7 @@ composable
 config
 Config
 configs
+configurability
 congrats
 Congrats
 CORS
@@ -175,6 +178,7 @@ NPM
 NS1
 OAuth
 oauth
+Ogopogo
 ok
 Ok
 OpenJS

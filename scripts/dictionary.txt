@@ -49,6 +49,7 @@ CDN
 CDNs
 CFAs
 cheatsheet
+Chupacabra
 CLA
 CLI
 Cloudflare
@@ -106,6 +107,7 @@ DynamoDB.
 easyDNS
 EC2
 eg.
+El
 endpoint
 endpoints
 env

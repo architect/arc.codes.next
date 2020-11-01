@@ -84,7 +84,7 @@ The `arc repl` local workflow has been retired. The module remains available for
 
 ### <span id=architect-8-breaking-changes>Breaking changes
 
-Architect 8 has a single breaking deploytime change that alters core application behavior: `@http get /` is now completely literal for `HTTP` APIs, and no longer serves as a greedy catchall.
+Architect 8 has a single breaking deploy-time change that alters core application behavior: `@http get /` is now completely literal for `HTTP` APIs, and no longer serves as a greedy catchall.
 
 However, even if you use `@http get /` with an `HTTP` API, you may not be broken by this change. The following criteria should identify whether you would be impacted by upgrading:
 

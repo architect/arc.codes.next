@@ -3,8 +3,13 @@ title: Upgrade guides
 description: This document covers upgrading from previous versions of Architect
 sections:
   - Overview of Architect versions
-  - Architect 6 to 7
-  - 4.x to 5.x
+  - Architect 7 &rarr; 8
+  - Architect 6 &rarr; 7
+  - Architect 5 &rarr; 6
+  - Architect 5 LTS maintenance schedule
+  - Architect 4 &rarr; 5
+  - Architect Functions
+  - Architect Data
 ---
 
 ## Overview of Architect versions
@@ -15,9 +20,9 @@ As a general philosophy, Architect's core maintainers endeavor to minimize the f
 
 ### Architect 8 (El Chupacabra)
 
-Architect 8 (El Chupacabra) improves API Gateway `HTTP` APIs by adding [`@proxy`](/reference/arc/proxy) support for migrating old APIs, and `any` HTTP method support and `*` catchall syntax, while also improving the default greedy catchall behavior of `get /` to be literal to what's found in the Architect manifest.
+Architect 8 (El Chupacabra) improves API Gateway `HTTP` APIs by adding [`@proxy`](/en/reference/arc-pragmas/@proxy) support for migrating old APIs, and `any` HTTP method support and `*` catchall syntax, while also improving the default greedy catchall behavior of `get /` to be literal to what's found in the Architect manifest.
 
-Although uncommon, certain Architect applications that use `get /` beyond handling `get` requests to `/` may be impacted by this change. [See more below](#architect-7-to-8).
+Although uncommon, certain Architect applications that use `get /` beyond handling `get` requests to `/` may be impacted by this change. [See more below](#architect-7-&rarr;-8).
 
 
 ### Architect 7 (Chupacabra)
@@ -26,48 +31,42 @@ Architect 7 (Chupacabra) evolves the Architect web application stack by defaulti
 
 Deploying to an existing Architect project (that makes use of REST APIs) is completely forwards compatible; **no breaking infrastructure changes will be applied by Architect 7 unless manually and explicitly opted into**.
 
-That said, Architect Sandbox workflows may potentially be impacted by this change. [See more below](#architect-6-to-7).
+That said, Architect Sandbox workflows may potentially be impacted by this change. [See more below](#architect-6-&rarr;-7).
 
 
 ### Architect 6 (Ogopogo)
 
 Architect 6 (Ogopogo) was a ground-up rewrite of Architect, driven by user feedback, cloud vendor best practices, and extensive learnings by Architect maintainers from the first three years of the project's life.
 
-Ogopogo is backward compatible with Architect 4 & 5, but depending on how you authored your project, there may have been [breaking changes going from 4/5 to 6](#architect-5-to-6).
+Ogopogo is backward compatible with Architect 4 & 5, but depending on how you authored your project, there may have been breaking changes. [Architect 5 &rarr; 6](#architect-5-&rarr;-6)
 
 What breaking changes there are, we have attempted to provide simple, forwards-compatible upgrade paths wherever possible.
 
 
 ### Architect 5 (Catalope)
 
-Architect 5 (Catalope) represented a major milestone in the project's functionality, introducing `@ws` (WebSocket) support. Catalope and was the last version to rely primarily on SDK calls to provision AWS infrastructure, and is currently in [LTS status](#architect-5).
+Architect 5 (Catalope) represented a major milestone in the project's functionality, introducing `@ws` (WebSocket) support. Catalope and was the last version to rely primarily on SDK calls to provision AWS infrastructure, and is currently in [Architect 5 LTS maintenance schedule](#architect-5-lts-maintenance-schedule).
 
 
 ### Architect 4 (Yeti)
 
-Architect 4 (Yeti) introduced generic, dependency-free HTTP functions, enhanced static asset support, and improved configurability. Information on upgrading from Yeti and versions prior to 4 are still available at the [Architect 5 docs archive](https://v5.arc.codes/guides/upgrade).
+Architect 4 (Yeti) introduced generic, dependency-free HTTP functions, enhanced static asset support, and improved configurability. Information on upgrading from Yeti and versions prior to 4 are still available at the [Architect 4 &rarr; 5](#architect-4-&rarr;-5).
 
 ---
 
 ### Topics
 
-<a href=#architect-7-to-8><b>Architect 7 &rarr; 8</b></a>
-
-<a href=#architect-6-7-maintenance><b>Architect 6 / 7 maintenance</b></a>
-
-<a href=#architect-6-to-7><b>Architect 6 &rarr; 7</b></a>
-
-<a href=#architect-5-to-6><b>Architect 5 &rarr; 6</b></a>
-
-<a href=#architect-functions><b>Architect Functions runtime helper library (`@architect/functions`)</b></a>
-
-<a href=#architect-data><b>Architect Data module (`@architect/data`)</b></a>
-
-<a href=#architect-5><b>Architect 5 LTS maintenance schedule</b></a>
+[Architect 7 &rarr; 8](#architect-7-&rarr;-8)
+[Architect 6 &rarr; 7](#architect-6-&rarr;-7)
+[Architect 5 &rarr; 6](#architect-5-&rarr;-6)
+[Architect 5 LTS maintenance schedule](#architect-5-lts-maintenance-schedule)
+[Architect 4 &rarr; 5](#architect-4-&rarr;-5)
+[Architect Functions](#architect-functions)
+[Architect Data](#architect-data)
 
 ---
 
-## <span id=architect-7-to-8>Architect 7 &rarr; 8</span>
+## Architect 7 &rarr; 8
 
 ### Overview
 
@@ -82,7 +81,7 @@ If your existing Architect app **does not use `@http` or `@static` pragmas**, or
 The `arc repl` local workflow has been retired. The module remains available for download at `@architect/repl` if you want to install and run it with `npx arc-repl`, although we will no longer officially support or maintain it.
 
 
-### <span id=architect-8-breaking-changes>Breaking changes
+### Breaking changes
 
 Architect 8 has a single breaking deploy-time change that alters core application behavior: `@http get /` is now completely literal for `HTTP` APIs, and no longer serves as a greedy catchall.
 
@@ -128,17 +127,15 @@ Architect 8 is fully compatible with `@architect/functions`.
 - [Architect issue 973: `Improve the default behavior of get /`](https://github.com/architect/architect/issues/973)
 - [Architect issue 969: `New @http syntax: * for {proxy+}`](https://github.com/architect/architect/issues/969)
 
----
+### Architect 6 + 7 maintenance
 
-## <span id=architect-6-7-maintenance>Architect 6 + 7 maintenance</span>
-
-Unlike [Architect 5, which remains in LTS (long-term support)](#architect-5), Architect 6 + 7-series are not actively maintained. This is specifically because Architect 6 + 7 are a largely forward-compatible releases that only contain minor breaking changes that are easily remediated.
+Unlike [Architect 5, which remains in LTS (long-term support)](#architect-5-lts-maintenance-schedule), Architect 6 + 7-series are not actively maintained. This is specifically because Architect 6 + 7 are a largely forward-compatible releases that only contain minor breaking changes that are easily remediated.
 
 We suggest upgrading to Architect 8 as soon as possible to take advantage of the great new features planned for 8.x.
 
 ---
 
-## <span id=architect-6-to-7>Architect 6 &rarr; 7</span>
+## Architect 6 &rarr; 7
 
 ### Overview
 
@@ -164,26 +161,22 @@ Architect 7 (Chupacabra) evolves the Architect web application stack by **defaul
 
 Architect 7 retains full backward compatibility for existing Architect 6 projects by continuing to deploy the same API type as you're currently using.
 
-
 ### Other changes
 
 - New apps will default to using `HTTP` APIs, but can be configured as `REST` APIs – more on that below
-
 
 ### Removed
 
 - Removed experimental support for static mocks
   - This was a very obscure experimental feature and should not impact anyone (but can be restored by building a macro)
 
-
-### <span id=architect-7-breaking-changes>Breaking changes
+### Architect 7 Breaking changes
 
 All breaking changes in Architect 7 pertain to local development and testing with Sandbox, Architect's development environment. **But good news: Sandbox 2.0, included in Architect 7, also has compatibility paths for Architect 6 that only require a few seconds of your time.**
 
 A core goal of Sandbox is to operate entirely locally and offline; that means no phoning home to AWS to introspect your current application configuration. Sandbox must run entirely from your machine using only your Architect project manifest. Thus, with the addition of `HTTP` APIs, Sandbox must now have a default API type.
 
 It naturally follows that Sandbox's default would now be `HTTP` (with Lambda payload format version 2.0), since that is now the default for new projects. Because [API Gateway `HTTP` APIs introduced breaking changes with `REST` APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html#http-api-develop-integrations-lambda.proxy-format), existing projects may not function correctly until reconfigured to operate in `REST` mode.
-
 
 #### Sandbox API type
 
@@ -209,6 +202,7 @@ Using `httpv1` as your API type:
 
 ```bash
 # app.arc|.arc|arc.yaml|etc.
+
 @aws
 apigateway httpv1
 ```
@@ -222,7 +216,6 @@ Using `rest` as your API type via CLI:
 ARC_API_TYPE=rest npx arc sandbox
 ```
 
-
 #### Sandbox test environment changes
 
 - Several seldom used and largely undocumented Sandbox module APIs intended for testing have breaking changes:
@@ -234,7 +227,6 @@ ARC_API_TYPE=rest npx arc sandbox
   - [Sandbox 2.0 API](https://github.com/architect/sandbox/blob/master/readme.md)
   - [Breaking changes to undocumented module APIs](https://github.com/architect/sandbox/blob/master/changelog.md#200-2020-09-15)
 
-
 ### Upgrade scenarios
 
 If your existing Architect 6 app **does not use `@http` or `@static` pragmas**, you're already ready to use to Architect 7.
@@ -243,8 +235,7 @@ If, like many, you use `@http` or `@static`, and you've configured Sandbox to op
 
 However, you may also want to use Architect 7 to upgrade your existing `REST` API to the shiny `HTTP` stuff. If so, read on, but note: **is a partially destructive change** that will result in new API Gateway URLs being generated. **Your old URLs will be destroyed** – if not accounted for, this may result in a service outage.
 
-
-#### Why upgrade to `HTTP` APIs?
+### Why upgrade to `HTTP` APIs?
 
 If your Architect app is working well, you may not need to upgrade to `HTTP` APIs – in fact, depending on how you make use of your existing `REST` API, it may not be an upgrade at all – `HTTP` APIs are newer, and do not have some of the deeper, more obscure functionality of the older, more mature `REST` API system.
 
@@ -257,7 +248,6 @@ For most applications most of the time, we now believe `HTTP` APIs are the right
 - `HTTP` APIs are where AWS is now putting the bulk of its API Gateway development effort
 - As of September 2020, `HTTP` APIs now support authorizers (which can be implemented via Architect Macros)
 - For more information, please [compare `HTTP` to `REST` APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html), and see [Architect issue #838](https://github.com/architect/architect/issues/838)
-
 
 #### Upgrading from `REST` to `HTTP`
 
@@ -275,6 +265,7 @@ Add the following to your project manifest:
 
 ```bash
 # app.arc|.arc|arc.yaml|etc.
+
 @aws
 apigateway http
 ```
@@ -299,7 +290,6 @@ Tip: if you'd like to use `HTTP` APIs with code authored for an existing `REST` 
 
 As you might expect, backward compatibility for `REST` APIs is retained with the `rest` setting; should you need to revert to `REST` mode, apply that via CLI with `--apigateway rest`, or in project manifest with `@aws apigateway rest`. (Again, that will destroy your URLs and generate new ones, so plan ahead for that.)
 
-
 #### Apps that use `@architect/macro-http-api` macro
 
 Unfortunately, we have observed strange side effects when using the Architect 6 `@architect/macro-http-api` macro when deploying with Architect 7.
@@ -315,7 +305,6 @@ We've observed the following behavior in CloudFormation when running Architect 7
 Because CloudFormation behavior is subject to change, and due to the aforementioned observed side effects, we advise existing `@architect/macro-http-api` macro users exercise caution upgrading to Architect 7.
 
 **If you are using `@architect/macro-http-api` in production today, you should not upgrade to Architect 7 until you've conducted field testing of your own, and are certain you are ready to transition your API URLs**.
-
 
 ### Compatibility with `@architect/functions`
 
@@ -334,12 +323,11 @@ Caveat: [per AWS](https://docs.aws.amazon.com/apigateway/latest/developerguide/h
 
 ---
 
-## <span id=architect-5-to-6>Architect 5 &rarr; 6</span>
+## Architect 5 &rarr; 6
 
 ### Overview
 
 Architect 6 is a milestone release that solves some of the most crucial feedback we've received over the last two years. There's a lot to highlight below, but the first thing to know is that for some (but not all) Architect users, upgrading to Architect 6 may have breaking changes. We'll cover those below.
-
 
 ### About Architect 6
 
@@ -352,14 +340,13 @@ Architect 6 is a milestone release that solves some of the most crucial feedback
   - This includes Ruby and Python support for the `sandbox` local dev server
   - It also includes ports of the Architect Functions module for [Ruby](https://github.com/architect/arc-functions-ruby) and [Python](https://github.com/architect/arc-functions-python)
     - Note: Functions for Ruby and Python is not yet at feature parity with the Node.js version, largely dictated by the availability and consistency of certain lower-level APIs in those runtimes.
-    - As such, broadly speaking, if using Architect Functions in your [HTTP functions](/primitives/http) we recommend the Node.js version, which includes the most extensive support for front-end facing use cases.
+    - As such, broadly speaking, if using Architect Functions in your [HTTP functions](/en/reference/functions/http-functions) we recommend the Node.js version, which includes the most extensive support for front-end facing use cases.
 - **Architect 6 now provisions CDNs with the `@cdn` pragma**
   - Finally, provision fast, fully-featured, global CDNs to live in front of your web app
   - This enables your web application to take advantage of crucial features like edge caching and global points of presence
 - **Architect 6 is now a globally installable CLI tool, and is fully modular**
   - With Architect 6, you have the choice of installing Architect to your project (with Architect commands now prefixed by `npx arc`), or by installing it globally (`npm i -g @architect/architect`)
   - Architect is also now modular; for example, you can run the `sandbox` dev server in isolation (`npm i @architect/sandbox`) without needing all of Architect, or build custom workflows with other Architect modules like `@architect/deploy`
-
 
 ### Other changes
 
@@ -379,7 +366,6 @@ Example basic cloud function `package.json`:
   }
 }
 ```
-
 
 ### Removed
 
@@ -405,7 +391,7 @@ A number of Architect v5 workflows have since been deprecated, including:
   - In the mean time, you can manually add a domain to your app from the AWS console for API Gateway or CloudFront CDN (depending on how you've configured your Architect app to deliver HTTP)
 
 
-### <span id=architect-6-breaking-changes>Breaking changes
+### Architect 6 Breaking changes
 
 - DynamoDB triggers (i.e. `@tables` `insert`, `update`, `destroy` Lambdas) are now defined with DynamoDB Streams enabled (`streamEnabled = true`)
   - [Learn more about DynamoDB Streams here](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_StreamSpecification.html)
@@ -420,7 +406,7 @@ The following Architect 5 `request` parameters changed in Architect 6:
   - Still one of `GET`, `POST`, `PATCH`, `PUT`, or `DELETE`
 - `body` is no longer a pre-parsed object
   - `body` is now either `null` or a base64-encoded buffer
-  - `body` must first be decoded, then parsed, to make use of it; Architect provides a handy helper to take care of this for you, see: [parsing HTTP request bodies](/primitives/http#parsing-request-bodies)
+  - `body` must first be decoded, then parsed, to make use of it; Architect provides a handy helper to take care of this for you, see: [parsing HTTP request bodies](/en/reference/functions/http-functions#requests)
 - `params` is now `pathParameters`
   - Still an object containing any URL params, if defined in your HTTP function's path (e.g. `foo` in `GET /:foo/bar`)
 - `query` is now `queryStringParameters`
@@ -441,7 +427,6 @@ The following Architect 5 `response` parameters changed in Architect 6:
 - `type` is now deprecated
   - To set the `Content-Type` of your content, please do so in the `headers` object, e.g. `headers: {'Content-Type': 'text/html; charset=utf-8;'}`
 
-
 ### Upgrade path
 
 Architect support two styles of authoring Node.js cloud function handlers:
@@ -450,13 +435,11 @@ Architect support two styles of authoring Node.js cloud function handlers:
 
 The upgrade path for each of which is covered below:
 
-
 #### Continuation-passing style HTTP functions (via `arc.http`)
 
 If your HTTP functions are authored continuation-passing style using Architect Functions (i.e. `arc.http`), you have no breaking code changes. Simply run `npx arc hydrate --update` and ensure all your HTTP functions are running `@architect/functions` version `^3.3.0` (or greater).
 
-
-#### <span id=arc-http-async>`async/await` style HTTP functions (via `arc.http.async`)</span>
+#### `async/await` style HTTP functions (via `arc.http.async`)
 
 If you already use `@architect/functions`'s `arc.middleware` (now `arc.http.async`) with your functions, you have no breaking code changes. Simply run `npx arc hydrate --update` and ensure all your HTTP functions are running `@architect/functions` version `^3.3.4` (or greater).
 
@@ -505,11 +488,161 @@ async function handler(request) {
 
 ---
 
-## <span id=architect-functions>Architect Functions module (`@architect/functions`)</span>
+## Architect 5 LTS maintenance schedule
+
+As of the release of Architect 6 in August 2019, Architect 5 is in LTS (long-term support). Architect maintainers will fix CVEs / security issues and critical bugs for a minimum of 6 months (i.e. through February 2020), and we expect that Architect 5 will continue working more or less hassle-free for some time to come.
+
+Non-critical bugs, feature requests, PR merges, etc. may be completed on a discretionary and case-by-case basis.
+
+---
+
+## Architect 4 &rarr; 5
+
+Architect version 5 is here!
+
+Things we added:
+
+- [WebSocket support](/en/guides/tutorials/adding-websockets-to-your-app)
+- [New middleware](/en/reference/runtime-helper-reference/arc-http) - added later in arc 4, and out of the box in Arc 5
+
+### 4.x
+
+Architect version 4 (Yeti) is here!
+
+Things we added:
+
+- `/public` for static assets
+- `@http` routes 
+- complete docs overhaul
+- new simpler install package `npm i @architect/architect`
+- one repo [architect/architect](https://github.com/architect/architect)
+- `@architect/functions` new APIs: `arc.http`, `arc.http.session` and `arc.http.helpers`
+
+Things we removed:
+
+- Statically bound Content-Type routes: `@html`, `@css`, `@js`, `@json`, `@text`, `@xml`
+- `@architect/functions` interfaces: `arc.css`, `arc.js`, etc.
+
+
+#### Upgrading to HTTP functions
+
+HTTP functions are now completely dynamic and allow for either async/await or Node style errback signatures with **zero deps**.
+
+Extremely new school style:
+
+```javascript
+exports.handler = async function http(request) {
+  return {
+    cors: true,
+    type: 'application/javascript',
+    body: JSON.stringify({hello:'world'})
+  }
+}
+```
+
+Extremely old school style:
+
+```javascript
+exports.handler = function http(request, context, callback) {
+  callback(null, {
+    cors: true,
+    type: 'application/javascript',
+    body: JSON.stringify({hello:'world'})
+  })
+}
+```
+
+Of course the `aws-sdk`, and `@architect/functions` and `@architect/data` are still available should you wish to opt into richer functionality. Session support is much more granular:
+
+```javascript
+let arc = require('@architect/functions')
+
+exports.handler = async function http(request) {
+
+  // read the session from DynamoDB
+  let session = await arc.http.session.read(request)
+
+  // mutate the session state
+  session.like = (session.like || 0) + 1
+
+  // write the session to DynamoDB and get a Set-Cookie string
+  let cookie = await arc.http.session.write(session)
+
+  // ensure the cookie gets updated on the client
+  return {
+    cookie,
+    cors: true,
+    type: 'application/javascript',
+    body: JSON.stringify({hello:'world'})
+  }
+}
+
+```
+
+The old school express-style middleware is still available with `@architect/functions`:
+
+```javascript
+let arc = require('@architect/functions')
+let url = arc.http.helpers.url
+
+function log(req, res, next) {
+  console.log('logger middleware:', JSON.stringify(req, null, 2))
+  next()
+}
+
+function route(req, res) {
+  res({
+    html: `hello world from ${url(req.path)}`
+  })
+}
+
+exports.handler = arc.http(log, route)
+```
+
+### 3.3.0
+
+`@architect/workflows` added SQS support in `3.3.0` and existing apps will need to add permissions to the default `arc-role` IAM Role used for Lambda execution if they want to add `@queues`.
+
+**Using the AWS Console**
+
+1. Open up IAM in the AWS Console
+2. Select **Roles** &rarr; **arc-role**
+3. Click **Attach Policies**
+4. Select **AWSLambdaSQSQueueExecutionRole**
+5. Click **Attach Policy**
+
+Now existing functions can publish to SQS queues.
+
+**With the AWS CLI**
+
+If the command line is more your style you can upgrade with the following:
+
+```bash
+aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole --role-name arc-role
+```
+
+**With NodeJS**
+
+If you prefer to script this upgrade you can use the NodeJS `aws-sdk`:
+
+```javascript
+let aws = require('aws-sdk')
+let PolicyArn = 'arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole'
+
+let iam = new aws.IAM
+iam.attachRolePolicy({
+  RoleName: 'arc-role'
+  PolicyArn, 
+}, console.log)
+```
+
+---
+
+## Architect Functions 
 
 ### Overview
 
-`@architect/functions` will continue to be actively maintained, and is forwards compatible with Architect 6 &rarr; 7 upgrades, and most Architect 5 &rarr; 6 upgrades.
+`@architect/functions` runtime helper library will continue to be actively maintained, and is forwards compatible with Architect 6 &rarr; 7 upgrades, and most Architect 5 &rarr; 6 upgrades.
 
 The Architect Functions module is now also available as a dependency for [Ruby](https://github.com/architect/arc-functions-ruby) and [Python](https://github.com/architect/arc-functions-python) functions.
 
@@ -534,8 +667,7 @@ Yes! It is supported by and forwards compatible in Architect 7, including use wi
 
 ### Does `@architect/functions` work in Architect 6?
 
-Yes! It is supported by and forwards compatible in Architect 6. Additionally, it has been expanded to include [`@tables` support for working with data](/reference/functions/tables).
-
+Yes! It is supported by and forwards compatible in Architect 6. Additionally, it has been expanded to include [`@tables` support for working with data](/en/reference/databases/tables).
 
 ### Will `@architect/functions` continue working in Architect 5?
 
@@ -543,7 +675,7 @@ Yes! `@architect/functions` is fully backward compatible with Architect 5. You c
 
 ---
 
-## <span id=architect-data>Architect Data module (`@architect/data`)</span>
+## Architect Data
 
 As of the release of Architect 6, the **Architect Data module (`@architect/data`) is now deprecated**, and has been superseded by `@architect/functions` `tables()` method.
 
@@ -593,10 +725,3 @@ exports.handler = async () => {
 }
 ```
 
----
-
-## <span id=architect-5>Architect 5 LTS maintenance schedule</span>
-
-As of the release of Architect 6 in August 2019, Architect 5 is in LTS (long-term support). Architect maintainers will fix CVEs / security issues and critical bugs for a minimum of 6 months (i.e. through February 2020), and we expect that Architect 5 will continue working more or less hassle-free for some time to come.
-
-Non-critical bugs, feature requests, PR merges, etc. may be completed on a discretionary and case-by-case basis.

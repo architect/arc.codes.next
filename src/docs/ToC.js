@@ -51,6 +51,7 @@ let reference = [
     'arc pragmas': [
       '@app',
       '@aws',
+      '@domain',
       '@events',
       '@http',
       '@indexes',

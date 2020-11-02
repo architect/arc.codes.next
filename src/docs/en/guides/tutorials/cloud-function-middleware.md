@@ -10,10 +10,10 @@ sections:
 
 ## Overview
 
-Architect provides two optional middleware helpers for cutting down on boilerplate HTTP operations by using the @architect/functions library. 
+Architect provides two optional middleware helpers for cutting down on boilerplate HTTP operations by using the [`@architect/functions`](https://github.com/architect/functions) library. 
 
-- `arc.http.async` is an `async/await` style middleware API
-- `arc.http` is a classic callback-style middleware API
+- [`arc.http.async`](/en/reference/runtime-helper-reference/arc-http-async) is an `async/await` style middleware API
+- [`arc.http`](/en/reference/runtime-helper-reference/arc-http) is a classic callback-style middleware API
 
 Both middleware helpers conveniently attach user sessions to the incoming `request` object (if applicable), and decode and parse the `request` body (again, if applicable).
 
@@ -35,7 +35,8 @@ Here's an example in which we'll register `addCountryCode`, `validateUser`, and 
 - `validateUser` will return a redirect response if the user is not logged in (ending `arc.http.async` processing), or return nothing if the user is logged in (continuing execution)
 - `showDashboard` will show a dashboard for users, since we know they're logged in
 
-1. Create a new Architect project with `arc init` in your terminal
+1. Create a new Architect project with `arc init` in your terminal.
+
 ```bash
 mkdir arc-async-middleware
 cd arc-async-middleware
@@ -113,6 +114,7 @@ async function showDashboard(request) {
 
 exports.handler = arc.http.async(addCountryCode, validateUser, showDashboard)
 ```
+
 In a single handler, we can add a country code to the `request` object, pass it to an authentication function, and finally build a `response` back to the client. 
 
 6. Now let's try it using Sandbox, our local dev environment. 
@@ -143,15 +145,18 @@ This type of middleware can execute code, make changes to the request objects, a
 
 In this example we will use the classic HTTP middleware function to render session data with user interaction.
 
-1. Create a new Architect project with `arc init` in your terminal
+1. Create a new Architect project with `arc init` in your terminal.
+
 ```bash
 mkdir arc-http-middleware
 cd arc-http-middleware
 arc init
 ```
 2. Replace the `app.arc` file with the following:
-```md
+
+```bash
 # app.arc file
+
 @app
 arc-http-middleware
 
@@ -175,6 +180,7 @@ npm init -y
 npm install @architect/functions
 ```
 5. Now we can replace the contents of `/src/http/get-index/index.js` with the following: 
+
 ```javascript
 var arc = require('@architect/functions')
 
@@ -193,7 +199,9 @@ function handler(req, res) {
 
 exports.handler = arc.http(handler)
 ```
+
 6. We can also replace the contents of `/src/http/post-count/index.js` with the following: 
+
 ``` javascript
 var arc = require('@architect/functions')
 
@@ -216,6 +224,7 @@ npm init -y
 npm install @architect/sandbox
 arc sandbox
 ```
+
 8. You should now see a page served at http://localhost:3333 that updates with the number of clicks. 
 
 ## Things to note about `arc.http`:
@@ -236,9 +245,11 @@ arc sandbox
 Architect also has a middleware function to wrap Express.js logic, this is good for migrating paths from existing Express applications into a serverless environment. It should be noted that bundling an entire web server in a Lambda function will result in poor performance if the entire function payload with dependencies exceeds 5MB. But, if you are already comfortable with understanding Express routing for backend APIs, then this helper can get your app up and running. 
 
 ### Example 
+
 1. Let's make a new Architect project directly from the command line! 
 
 This command will create a new directory, install a local version of Architect, and generate a folder structure.
+
 ```bash
 npm init @architect ./myexpress
 ```
@@ -252,6 +263,7 @@ cd myexpress/src/http/get-index
 npm init -y 
 npm i express @architect/functions
 ```
+
 4. Replace the contents of `src/http/get-index/index.js` with the following: 
 
 ```javascript

@@ -19,7 +19,7 @@ DNS is how you assign a domain name to a deployed app. This guide lists ways to 
 
 Setting up `app.arc` with a custom domain name
 
-`arc` has built-in first-class support for setting up DNS and assigning a domain. First add [`@domain`]('#null') to your `app.arc` file with a value of the domain name you wish to set up.
+`arc` has built-in first-class support for setting up DNS and assigning a domain. First add [`@domain`](/en/reference/arc-pragmas/@domain) to your `app.arc` file with a value of the domain name you wish to set up.
 
 ```bash
 @app
@@ -85,7 +85,7 @@ If you _really_ want to manually configure DNS you can follow these guides below
 
 ## Route 53
 
-Follow these instructions to manually configure Route 53 to serve your application from your domain. As a friendly reminder: the `arc` happy path for using Route 53 remains the [`@domain`](#null) section (per the instructions above).
+Follow these instructions to manually configure Route 53 to serve your application from your domain. As a friendly reminder: the `arc` happy path for using Route 53 remains the [`@domain`](/en/reference/arc-pragmas/@domain) section (per the instructions above).
 
 > ⛳️ Tip: These instructions will serve your app's production environment; if you'd also like a friendly URL for your staging environment (i.e. `staging.foo.com`), follow steps 10-15 below a second time, swapping `production` values for `staging` values.
 
@@ -115,9 +115,6 @@ Follow these instructions to manually configure Route 53 to serve your applicati
   - Enter **Distribution Domain Name** you just copied to your clipboard into the **Alias Target** field
 15. Create the `Record Set`
 16. Perhaps grab a cup of coffee or tea ☕️ – it can take a few minutes while AWS wires everything up!
-
-<a name="cloudflare"></a>
-
 
 ## Cloudflare
 

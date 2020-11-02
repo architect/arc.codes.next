@@ -210,4 +210,4 @@ ADD ME!
 
 - [Configuring the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 - [Amazon Configuration and Credential Files](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)
-- [Working with multiple AWS accounts](/guides/multiple-aws-accounts)
+- [Working with multiple AWS accounts](/en/guides/tutorials/multiple-aws-accounts)

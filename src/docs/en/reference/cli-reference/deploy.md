@@ -9,7 +9,7 @@ sections:
 
 ## `Overview`
 
-`@architect/deploy` is a deployment module that deploys Architect applications to cloud infrastructure. `arc deploy` deploys code in `src` with CloudFormation and public by directly uploading files to S3.
+[`@architect/deploy`](https://github.com/architect/deploy) is a deployment module that deploys Architect applications to cloud infrastructure. `arc deploy` deploys code in `src` with CloudFormation and public by directly uploading files to S3.
 
 This module also deploys code found in `/src` to `staging`. If `ARC_DEPLOY=production` is set, the code in `/src` will be deployed to `production`. (A lot of other things happen under the hood, outlined below.)
 

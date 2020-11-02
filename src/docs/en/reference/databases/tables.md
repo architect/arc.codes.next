@@ -62,14 +62,16 @@ accounts
 
 `@tables` defines DynamoDB database tables and trigger functions for them.
 
-**Table name syntax**
+#### Table name syntax
+
 - Lowercase alphanumeric string
 - Between 3 and 255 characters
 - Dashes are allowed
 - Underscores are not allowed
 - Must begin with a letter
 
-**Table structure syntax**
+#### Table structure syntax
+
 - Keys and Lambdas are defined by indenting two spaces
 - The required partition key is denoted by `*`
 - The optional sort key is denoted by `**`

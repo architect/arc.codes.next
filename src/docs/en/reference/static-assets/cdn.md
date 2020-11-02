@@ -14,7 +14,7 @@ Architect projects support the ability to add a content delivery network (CDN) w
 
 ## Provision
 
-Given the following `.arc` file:
+Given the following `app.arc` file:
 
 ```bash
 @app

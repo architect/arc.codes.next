@@ -14,6 +14,7 @@ application/json
 APIs
 arc-example-cors
 arc-repos
+arc-pragmas
 arcfile
 arcana
 ARN

@@ -65,7 +65,7 @@ exports.handler = async function http(req) {
 }
 ```
 
-### Example with interator
+### Example with iterator
 
 ```javascript
 let arc = require('@architect/functions')

@@ -1,6 +1,6 @@
 ---
 title: arc.http.helpers
-description: additional webby helpers
+description: additional web helpers
 sections:
   - Body parser
   - URL

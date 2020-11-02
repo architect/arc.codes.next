@@ -1,6 +1,6 @@
 ---
 title: arc.queues
-description: Invoke @queue handlers from any other function defined under the same @app namespace.
+description: Invoke @queue handlers from any other function defined under the same @app name space.
 sections:
   - Overview
   - Publish

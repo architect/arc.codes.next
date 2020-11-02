@@ -1,6 +1,6 @@
 ---
 title: WebSocket functions
-description: 160 (or fewer) character description of this document!
+description: WebSockets provide a persistent connection between a client and a server.
 sections:
   - Overview
   - Getting started

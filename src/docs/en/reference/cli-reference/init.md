@@ -1,6 +1,6 @@
 ---
 title: init
-description: Bootstrapping a new Architect project with folder structures and .arc file
+description: Bootstrapping a new Architect project with folder structures and an app.arc file
 sections:
   - Overview
   - Usage

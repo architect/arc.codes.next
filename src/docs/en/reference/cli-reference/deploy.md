@@ -38,6 +38,8 @@ Architects deploy process does a number of things during each deploy! In summary
 
 ## Usage
 
+> **Requirements:** You need to have the sam command-line utility available on your $PATH. Check out [AWS' docs](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html) for instructions on how to install this.
+
 - `arc deploy` deploys to a staging stack
 - `arc deploy dirty` overwrites static lambda with local source (fast!)
 - `arc deploy production` deploys to a production stack

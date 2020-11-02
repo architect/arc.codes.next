@@ -1,6 +1,6 @@
 ---
 title: Architect project structure
-description: 160 (or fewer) character description of this document!
+description: The Architect manifest file is the core of your apps functionality.
 sections:
   - Overview
   - Creating new resources & files

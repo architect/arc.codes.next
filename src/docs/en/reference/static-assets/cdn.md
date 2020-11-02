@@ -1,6 +1,6 @@
 ---
 title: CDN
-description: 160 (or fewer) character description of this document!
+description: Content delivery network (CDN) with AWS CloudFront
 sections:
   - Overview
   - Provision

@@ -1,6 +1,6 @@
 ---
 title: Static
-description: 160 (or fewer) character description of this document!
+description: Architect projects support text and binary assets such as images, styles, and scripts.
 sections:
   - Overview
   - Fingerprint

@@ -1,6 +1,6 @@
 ---
 title: Tables
-description: 160 (or fewer) character description of this document!
+description: Defines DynamoDB tables and indexes define global secondary indexes to facilitate more advanced access patterns.
 sections:
   - Overview
   - Getting started

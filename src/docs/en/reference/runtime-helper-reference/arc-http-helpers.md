@@ -1,6 +1,6 @@
 ---
 title: arc.http.helpers
-description: 160 (or fewer) character description of this document!
+description: additional webby helpers
 sections:
   - Body parser
   - URL

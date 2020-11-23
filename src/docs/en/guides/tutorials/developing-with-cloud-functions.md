@@ -183,12 +183,14 @@ When a user visits `/`, the following HTTP function in `src/http/get-index/index
 ```javascript
 exports.handler = async function http(request) {
   return {
-    status: 201,
-    type: 'text/html; charset=utf8',
+    statusCode: 201,
+    headers: {'content-type': 'text/html; charset=utf8'},
     body: `
       <!doctype html>
       <html>
-        <body>hello world</body>
+        <body>
+          <p>hello world</p>
+        </body>
       </html>
    `
   }
@@ -205,7 +207,7 @@ exports.handler = async function http(request) {
 const notFound = async function http(request) {
   if (request.path !== "/") {
     return {
-      status: 404,
+      statusCode: 404,
       type: 'text/html; charset=utf8',
       body: `<b>${request.path} not found</b>` 
     }

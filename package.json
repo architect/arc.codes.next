@@ -15,7 +15,7 @@
     "@architect/architect": "^8.0.3",
     "eslint": "^7.11.0",
     "husky": "^4.3.0",
-    "markdown-it-anchor": "^6.0.0",
+    "markdown-it-anchor": "^8.1.0",
     "slugify": "^1.4.5",
     "spellchecker-cli": "^4.4.0"
   },
